@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: #f1bb8f;
+}
+
+header {
+    color :#2660A4;
+    background-color: rgb(236, 139, 69);
+    padding-left: 20px;
+    top: 0;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.Trip {
+    color: #EDF7F6;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 900px;
+    height: 450px;
+    max-width: 80%;
+    background-color: white;
+    box-shadow: 0 0 10px 2px;
+}

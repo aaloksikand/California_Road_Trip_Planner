@@ -25,6 +25,10 @@ function initMap() {
 
     addMarker(la);
     addMarker(sf);
+
+    /*Test Code */
+
+    map.getTilt();
     
 }
 

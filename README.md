@@ -1,1 +1,19 @@
-# California_Road_Trip_Planner
+# CALIFORNIA ROAD TRIP PLANNER
+
+## Project Description
+
+### User Story
+
+### Acceptance Criteria
+
+
+### Links
+
+
+### Technologies Used
+
+
+### APIs Used
+### Screenshot
+
+### References

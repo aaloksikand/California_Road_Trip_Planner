@@ -29,16 +29,128 @@ header {
 
 main {
     display: flex;
-    width: 100%;
-    height: 60vh;
     justify-content: center;
     align-items: center;
+}
+
+
+img {
+    width: 150px;
+    height: 150px;
 }
 
 .container {
     background-color:var(--background-color);
     box-shadow: 0 0 10px 2px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
+
+.attraction-checkbox {
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    background: white;
+    transition: transform .15s;
+  }
+  
+  .attraction-checkbox:first-of-type {
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  
+  .attraction-checkbox:active {
+    transform: scale(0.9);
+  }
+  
+  input {
+    display: none;
+  }
+  
+  input:checked + label {
+    opacity: 1;
+    box-shadow: 0 0 0 3px rgb(60, 60, 194);
+  }
+  
+  input:checked + label img {
+    -webkit-filter: none; 
+    filter: none;
+  }
+  
+  input:checked + label .checkbox-cover {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  input:checked + label .checkbox-cover svg {
+    stroke-dashoffset: 0;
+  }
+  
+  label {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    opacity: 0.6;
+  }
+  
+  label img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    clip-path: polygon(0% 0%, 100% 0, 100% 81%, 50% 100%, 0 81%);
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+  }
+  
+  label .checkbox-cover {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: blue;
+    border: 2px solid #fff;
+    transition: transform .15s,
+      opacity calc(.15s * 1.2) linear;
+    opacity: 0;
+    transform: scale(0);
+  }
+  
+  label .checkbox-cover svg {
+    width: 13px;
+    height: 11px;
+    display: inline-block;
+    vertical-align: top;
+    fill: none;
+    margin: 5px 0 0 3px;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    transition: stroke-dashoffset 0.4s ease .15s;
+    stroke-dashoffset: 16px;
+  }
+  
+  label .attraction {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 10px;
+  }
+
+  .five {
+      margin-right: 30px;
+  }
 
 
 /*Styling for MAP*/
@@ -47,3 +159,4 @@ main {
     height:600px;
     width:100%;
 }
+

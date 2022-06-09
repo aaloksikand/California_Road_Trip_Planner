@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Road Trip Planner</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #map{
+            height:500px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <!--HTML for displaying the MAP-->
+    <div id="map"></div>
+
+
+    <script>
+            function initMap(){
+//California Coords:lat : 36.778259 lng:-119.417931
+
+//Latitude ranges between -90 and 90 degrees,
+//Longitude ranges between -180 and 180 degrees,
+               
+
+                //map will be centered at LA
+
+                  // // restriction: {latLngBounds:{north: 34, south: -57, west: -180, east: 180}}
+                        // estriction: {latLngBounds:{north: 83.8, south: -57}}
+                        //north should be greater than south
+    //                     restriction: {
+    // latLngBounds: {
+    //   north: 37,
+    //   south: 32,
+    //   east: 114,
+    //   west: 120,
+    // },
+    //  
+
+
+       //    , maxBounds=new google.maps.LatLngBounds(
+                //         new google.maps.LatLng(),
+                //         new google.maps.LatLng(),
+                //     )
+
+
+     //Coordinates for LA
+     const la={lat: 34.052235,lng :-118.243683};
+
+
+//Coordinates for SF
+const sf={lat:37.774929,lng:-122.419418};
+                const map= new google.maps.Map(
+                    document.getElementById('map'),
+                    {
+                        // gestureHandling: "none",
+                        zoom:6,
+                        minZoom:4,
+                        maxZoom:7,
+                        //Paso Robles coords midway between la to sf
+                        // center:{lat:35.625648,lng:-120.691322},
+                        center:la,});
+
+                //                      });
+                //                      const maxBounds=new google.maps.LatLngBounds(
+                //     new google.maps.LatLng(34.052235,-118.243683),
+                //      new google.maps.LatLng(37.774929,-122.419418),
+                //  )
+    
+               map.fitBounds([34.052235,-118.243683],[37.774929,-122.419418]);
+               map.panToBounds([34.052235,-118.243683],[37.774929,-122.419418]); 
+                
+                addMarker(la);
+                addMarker(sf);
+                function addMarker(location){
+                    const marker=new google.maps.Marker({position:location,map:map});
+                }
+                };
+           
+                   
+                
+
+//fit bound will take SW point and NE point ,if not sure of it create empty bound
+            // map.fitBounds([[34.052235,-118.243683],[37.774929,-122.419418]]);
+
+
+//             var bounds = new google.maps.LatLngBounds();
+// bounds.extend(sf);
+// bounds.extend(la);
+// map.fitBounds(bounds);
+
+
+                // console.log(map.getCenter());
+                
+                
+                //Creating marker for loactions LA and SF
+
+
+                // let mapBounds=new google.maps.LatLngBounds(
+                //     new google.maps.LatLng(34.052235,-118.243683),
+                //     new google.maps.LatLng(37.774929,-122.41941)
+                // );
+
+                // let validCenter=map.getCenter();
+
+                // function verifyBounds(){
+
+                //     if(mapBounds.contains(map.getCenter())){
+                //         validCenter=map.getCenter();
+                //         return;
+                //     }
+                //     map.panTo(validCenter);
+                // }
+
+
+                // google.maps.event.addEventListener(map,'center_changed',verifyBounds);
+
+
+            
+
+
+
+
+    </script>
+
+
+    <!-- 
+
+    callback executes the initMap function
+
+    async allows the API loading to happen parellely while the remaining page is rendering
+
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap"
+    
+  ></script>
+    
+</body>
+</html>
+
+
+<!--
+    
+    TO DO MArker Animation -After User select the locations/attractions
+
+    Refer Make a  Marker Accessible
+
+
+-->
+
+<!--
+
+
+    To check this
+
+
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+panControl: true,
+mapTypeControl: false,
+panControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+zoomControl: true,
+zoomControlOptions: {
+    style: google.maps.ZoomControlStyle.LARGE,
+    position: google.maps.ControlPosition.RIGHT_CENTER
+},
+scaleControl: false,
+streetViewControl: false,
+streetViewControlOptions: {
+    position: google.maps.ControlPosition.RIGHT_CENTER
+            }
+        };
+  
+
+    }
+-->

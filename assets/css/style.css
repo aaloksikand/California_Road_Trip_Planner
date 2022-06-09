@@ -1,19 +1,25 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/*CSS Variables assigne to root*/
+:root{
+
+    --background-color:aliceblue;
+    --text-color:#2660A4;
+}
 body {
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    background-color: #f1bb8f;
+    background-color: var(--background-color);
 }
 
 header {
-    color :#2660A4;
-    background-color: rgb(236, 139, 69);
+    background-color: var(--background-color);
     padding-left: 20px;
     top: 0;
     height: 100px;
@@ -30,10 +36,7 @@ main {
 }
 
 .container {
-    width: 900px;
-    height: 450px;
-    max-width: 80%;
-    background-color: white;
+    background-color:var(--background-color);
     box-shadow: 0 0 10px 2px;
 }
 
@@ -41,6 +44,6 @@ main {
 /*Styling for MAP*/
 
 #map{
-    height:500px;
+    height:600px;
     width:100%;
 }

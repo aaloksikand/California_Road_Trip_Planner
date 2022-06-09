@@ -27,11 +27,11 @@ header {
     align-items: center;
 }
 
-main {
+/* main {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 
 img {
@@ -39,15 +39,21 @@ img {
     height: 150px;
 }
 
-.container {
+ .container {
     background-color:var(--background-color);
     box-shadow: 0 0 10px 2px;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-}
+     align-content: center; 
+    justify-content: center; 
+}  
 
+
+/* .checklist-container{
+
+    background-color:var(--background-color);
+    box-shadow: 0 0 10px 2px;
+} */
 .attraction-checkbox {
     width: 150px;
     height: 100px;

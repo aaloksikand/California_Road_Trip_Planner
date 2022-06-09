@@ -1,7 +1,5 @@
 /*
-
 InitMap function to initialize the map with following properties
-
 */
 
 function initMap() {
@@ -14,11 +12,26 @@ function initMap() {
   //Coordinates for center-fresno coords
   const center={lat:36.746841, lng:-119.772591};
 
+  const bounds={
+      north:45,
+      south:30,
+      west:-130,
+      east:110
+  };
+
+  
+
   const map= new google.maps.Map(
     document.getElementById('map'),
     {
+        minZoom:5,
+        maxZoom:8,
         zoom:6,
         center:center,
+        restriction:{ 
+            latLngBounds:bounds,
+            strictBounds:false
+        }
     });
 
     //Function to add marker to the location passed to it
@@ -30,3 +43,14 @@ function initMap() {
     addMarker(sf);
 
 }
+
+/* Adding / Removing Markers When user selects the checkbox using JQuery*/
+
+var checkBoxList = $('.attraction-checkbox')
+
+checkBoxList.on('checked',function(event){
+
+    console.log(event.target);
+});
+console.log(checkBoxList);
+

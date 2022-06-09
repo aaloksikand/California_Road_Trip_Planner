@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>California Road Trip Planner</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
-    <!--HTML for displaying the MAP-->
-    <div id="map"></div>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>California Road Trip Planner</h1>
+      <nav></nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <div>Place holder for google map</div>
+      </div>
+    </main>
+    
+    <div class="container">
+      <div>Place holder for attractions</div>
+      <button>Plan My Trip</button>
+    </div>
 
 
-
-
- <!-- Google Javascript Map API
-
-     *The `defer` attribute causes the callback to execute after the full HTML
-     document has been parsed. For non-blocking uses, avoiding race conditions,
-     and consistent behavior across browsers, consider loading using Promises
-     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
-
-    *The callback attribute executes the initMap function
-
-    *The async attrobute allows the API loading to happen parellely while the remaining page is rendering
-  -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap&v=weekly">
-    </script>
-
-     <!--External Javascript Link-->
-<script src="./assets/js/script.js"></script> 
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>

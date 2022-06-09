@@ -24,7 +24,7 @@ function initMap() {
   const map= new google.maps.Map(
     document.getElementById('map'),
     {
-        minZoom:5,
+        minZoom:4,
         maxZoom:8,
         zoom:6,
         center:center,

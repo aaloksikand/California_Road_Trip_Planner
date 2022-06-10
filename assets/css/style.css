@@ -45,8 +45,8 @@ main {
 }
 
 .attraction-checkbox {
-  width: 150px;
-  height: 100px;
+  width: 170px;
+  height: 130px;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.075);
   background: white;
@@ -140,14 +140,16 @@ label .checkbox-cover svg {
 
 label .attraction {
   text-align: center;
-  margin-top: 10px;
   font-weight: 600;
-  font-size: 10px;
+  font-size: 15px;
 }
 
-/* .five {
-  margin-right: 5px;
-} */
+label .attraction-detail {
+    text-align: center;
+    font-weight: 600;
+    font-size: 10px;
+}
+
 
 /*Styling for MAP*/
 

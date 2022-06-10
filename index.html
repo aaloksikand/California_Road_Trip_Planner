@@ -22,12 +22,11 @@
         <div class="container map-container">
             <div id="map"></div>
         </div>
-    
         <div class="container" id = "attraction-box">
           <div class ="row">
           <div class="col-2 offset-1">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox1" />
+              <input type="checkbox" id="checkbox1" value="34.031246,-118.788193"/>
               <label for="checkbox1">
                 <img src="assets/images/Malibu.jpg" alt = "Image of Malibu"/>
                 <span class="checkbox-cover">
@@ -44,7 +43,7 @@
       
           <div class="col-2">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox2" />
+              <input type="checkbox" id="checkbox2" value="34.456936,-119.254440"/>
               <label for="checkbox2">
                 <img src="assets/images/Ojai.webp" alt = "Image of Ojai"/>
                 <span class="checkbox-cover">
@@ -62,7 +61,7 @@
         
           <div class="col-2">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox3" />
+              <input type="checkbox" id="checkbox3" value="34.420830,-119.698189"/>
               <label for="checkbox3">
                 <img src="assets/images/Santa-Barbara.jpg" alt = "Image of Santa Barbara"/>
                 <span class="checkbox-cover">
@@ -80,7 +79,7 @@
        
           <div class="col-2">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox4" />
+              <input type="checkbox" id="checkbox4" value="34.5897,-120.1372"/>
               <label for="checkbox4">
                 <img src="assets/images/Solvang.jpg" alt = "Image of Solvang"/>
                 <span class="checkbox-cover">
@@ -98,7 +97,7 @@
      
           <div class="col-2 five">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox5" />
+              <input type="checkbox" id="checkbox5" value="35.370781,-120.851173"/>
               <label for="checkbox5">
                 <img src="assets/images/Morro-Bay.jpg" alt = "Image of Morro Bay"/>
                 <span class="checkbox-cover">
@@ -116,7 +115,7 @@
           <div class = "row"> 
           <div class="col-2  offset-1">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox6" />
+              <input type="checkbox" id="checkbox6" value="35.640556,-120.680008"/>
               <label for="checkbox6">
                 <img src="assets/images/Paso-Robles.jpg" alt = "Image of Paso Robles"/>
                 <span class="checkbox-cover">
@@ -133,7 +132,7 @@
 
         <div class="col-2">
           <div class="attraction-checkbox">
-            <input type="checkbox" id="checkbox7" />
+            <input type="checkbox" id="checkbox7" value="36.1045,-121.6222" />
             <label for="checkbox7">
               <img src="assets/images/Big-Sur.jpg" alt = "Image of Big Sur"/>
               <span class="checkbox-cover">
@@ -149,7 +148,7 @@
 
         <div class="col-2">
           <div class="attraction-checkbox">
-            <input type="checkbox" id="checkbox8" />
+            <input type="checkbox" id="checkbox8" value="36.555241,-121.923286"/>
             <label for="checkbox8">
               <img src="assets/images/Carmel-by-the-Sea.jpg" alt = "Image of Carmel-by-the-Sea"/>
               <span class="checkbox-cover">
@@ -161,11 +160,10 @@
               <div class="attraction-detail">17 Mile Drive</div>
             </label>
           </div>
- 
         </div>
         <div class="col-2">
           <div class="attraction-checkbox">
-            <input type="checkbox" id="checkbox9" />
+            <input type="checkbox" id="checkbox9" value="36.974117,-122.030792"/>
             <label for="checkbox9">
               <img src="assets/images/Santa-Cruz.jpg" alt = "Image of Santa Cruz"/>
               <span class="checkbox-cover">
@@ -181,7 +179,7 @@
 
         <div class="col-2">
           <div class="attraction-checkbox">
-            <input type="checkbox" id="checkbox10" />
+            <input type="checkbox" id="checkbox10" value="37.463552,-122.428586"/>
             <label for="checkbox10">
               <img src="assets/images/Half-Moon-Bay.jpg" alt = "Image of Half Moon Bay"/>
               <span class="checkbox-cover">
@@ -194,24 +192,29 @@
             </label>
           </div>
         </div>
-        </div>
-        </div>
-    
+        <!-- </div>
+        </div> -->
+       
     </main>
-  
-   <!--
-            Placeholder for the Carousel and View Direction Button
-            This will appear after  user clicks on plan trip button
-        -->
 
-    <div id="buttonDiv">
-      <button>Plan My Trip</button>
-      <button>View the Directions in Details</button>
+
+    <!-- Removed the hyperlink -->
+    <button id="plan-trip">Plan My Trip</button>
+
+      <!--The below elements will be hidden-->
+      <div id="buttonDiv">
+          <button id="direction-btn">View Directions Button Here</button>
+      </div>
       <div id="directions-panel"></div>
-      <!--Button will be inserted here-->
-    </div>
+       <!--
+              Placeholder for the Carousel and View Direction Button
+              This will appear after  user clicks on plan trip button
+          -->
+          
+      <div id="carousel-container">
+                Carousel Data
+       </div>
 
-    <div id="carousel-container">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

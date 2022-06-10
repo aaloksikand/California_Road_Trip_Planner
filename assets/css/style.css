@@ -4,21 +4,23 @@
   box-sizing: border-box;
 }
 
+
 /*CSS Variables assign to root*/
 :root {
   --body-background-color: #fbe0c3;
   --header-background-color: #344648;;
-  --white: white;
-  --black: black;
+  --white: #fff;
+  --black: #000;
   --card-box: #7D8e95;
   --blue: rgb(2, 0, 138);
-
 }
+
 body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  
   background-color: var(--body-background-color);
 }
 
@@ -40,6 +42,7 @@ main {
 
 /* styling for all the card containers */
 .container {
+
   background-color: var(--card-box);
   box-shadow: 0 0 10px 2px;
   display: flex;
@@ -50,6 +53,7 @@ main {
 }
 
 .attraction-checkbox {
+
   width: 170px;
   height: 130px;
   border-radius: 10px;
@@ -76,6 +80,7 @@ input {
 input:checked + label {
   opacity: 1;
   box-shadow: 0 0 0 3px var(--white);
+
 }
 
 input:checked + label img {
@@ -87,6 +92,7 @@ input:checked + label .checkbox-cover {
   opacity: 1;
   transform: scale(1);
 }
+
 
 input:checked + label .checkbox-cover svg {
   stroke-dashoffset: 0;
@@ -163,6 +169,7 @@ div a {
     font-size: 15px;
 }
 
+
 button {
     margin-left: 48%;
 }
@@ -178,3 +185,7 @@ button {
 }
 
 
+/*Initially Display is set as none for carousel*/
+#carousel-container{
+    display: none;
+}

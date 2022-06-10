@@ -161,17 +161,7 @@
               <div class="attraction-detail">17 Mile Drive</div>
             </label>
           </div>
-        <!--
-            Placeholder for the Carousel and View Direction Button
-            This will appear after  user clicks on plan trip button
-        -->
-        <div id="buttonDiv">
-            <button>View the Directions in Details</button>
-            <div id="directions-panel"></div>
-            <!--Button will be inserted here-->
-        </div>
-        <div id="carousel-container">
-
+ 
         </div>
         <div class="col-2">
           <div class="attraction-checkbox">
@@ -208,9 +198,20 @@
         </div>
     
     </main>
-    <button>
-      <a href="direction-page.html" target="_blank">Plan My Trip</a>
-    </button>
+  
+   <!--
+            Placeholder for the Carousel and View Direction Button
+            This will appear after  user clicks on plan trip button
+        -->
+
+    <div id="buttonDiv">
+      <button>Plan My Trip</button>
+      <button>View the Directions in Details</button>
+      <div id="directions-panel"></div>
+      <!--Button will be inserted here-->
+    </div>
+
+    <div id="carousel-container">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -226,8 +227,8 @@
     * async allows the API loading to happen parellely while the remaining page is rendering
     -->
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap"></script>
+    <script src="assets/js/Modal.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 

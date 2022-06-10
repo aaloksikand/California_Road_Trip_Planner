@@ -6,20 +6,27 @@
 
 /*CSS Variables assign to root*/
 :root {
-  --background-color: aliceblue;
-  --text-color: #2660a4;
+  --body-background-color: #fbe0c3;
+  --header-background-color: #344648;;
+  --white: white;
+  --black: black;
+  --card-box: #7D8e95;
+  /* #344648; */
+  /* #7D8e95; */
+  /* #ffbb98 */
+  /* #fbe0c3 */
 }
 body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  background-color: var(--background-color);
+  background-color: var(--body-background-color);
 }
 
 header {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--header-background-color);
+  color: var(--white);
   top: 0;
   height: 100px;
   display: flex;
@@ -35,7 +42,7 @@ main {
 
 /* styling for all the card containers */
 .container {
-  background-color: var(--background-color);
+  background-color: var(--card-box);
   box-shadow: 0 0 10px 2px;
   display: flex;
   flex-wrap: wrap;
@@ -48,8 +55,8 @@ main {
   width: 170px;
   height: 130px;
   border-radius: 10px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.075);
-  background: white;
+  box-shadow: 0 5px 5px var(--black);;
+  background: var(--white);
   transition: transform 0.15s;
   justify-content: space-evenly;
   align-items: center;
@@ -70,7 +77,7 @@ input {
 
 input:checked + label {
   opacity: 1;
-  box-shadow: 0 0 0 3px var(--text-color);
+  box-shadow: 0 0 0 3px var(--white);
 }
 
 input:checked + label img {
@@ -116,7 +123,7 @@ label .checkbox-cover {
   height: 20px;
   border-radius: 50%;
   background: var(--text-color);
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
   transition: transform 0.15s, opacity calc(0.15s * 1.2) linear;
   opacity: 0;
   transform: scale(0);
@@ -129,7 +136,7 @@ label .checkbox-cover svg {
   vertical-align: top;
   fill: none;
   margin: 5px 0 0 3px;
-  stroke: #fff;
+  stroke: var(--white);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -153,7 +160,7 @@ label .attraction-detail {
 a {
     display: flex;
     justify-content: center;
-    color: black;
+    color: var(--black);
     font-weight: 600;
     font-size: 15px;
 }

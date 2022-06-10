@@ -88,12 +88,12 @@ checkBoxList.click(function(event){
 
         let latlngObj={"lat":lat,"lng":lng};
 
-        //Wyapoint object with stop over property so that it ca
-        // waypntObj={
-        //     location:latlngObj
-        // }
+        //Waypoint object with stop over property so that it ca
+         waypntObj={
+             location:latlngObj
+        }
 
-        waypoints.push(latlngObj);  
+        waypoints.push(waypntObj);  
 
         //Adding marker for respective waypoints/attractions user selects to the map and array
         //Converted to LatLng as the lat and lng values from object exist in string
@@ -110,21 +110,21 @@ checkBoxList.click(function(event){
        for(let index=0;index<waypoints.length;index++){
        
         //Verify if the selected element is removed from the array
-        if(Object.values(waypoints[index].location).join(",")===$(this).val()){
+         if(Object.values(waypoints[index].location).join(",")===$(this).val()){
             
             waypoints.splice(index,1);    
 
             markers[index].setMap(null); 
-            markers.splice(index,1); 
+             markers.splice(index,1); 
 
-        }
+            
+
+         }
         }
         
  
     }
 
-    console.log(waypoints);
-    console.log(markers);
     
 });
     
@@ -227,7 +227,7 @@ function calculateRoute(directionService,directionsRenderer){
         const route=response.routes[0];
         console.log(route);
 
-        /*TO DO -Direction in Steps */
+        /*TO DO -Direction in Steps---Need to change to JQUERY--Sample from API documentation */
         const summaryPanel = document.getElementById(
             "directions-panel"
           );

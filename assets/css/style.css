@@ -173,6 +173,7 @@ div a {
 button {
     margin-left: 48%;
 }
+/*Additions on 06-10*/
 /*Styling for MAP*/
 
 #map {
@@ -185,7 +186,8 @@ button {
 }
 
 
-/*Initially Display is set as none for carousel*/
-#carousel-container{
+/*Initially Display is set as none for carousel,Directions button adn directons panel*/
+
+#carousel-container,#directions-panel,#buttonDiv{
     display: none;
 }

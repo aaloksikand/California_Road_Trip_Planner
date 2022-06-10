@@ -84,6 +84,7 @@ checkBoxList.click(function(event){
 
     if($(this).prop('checked')){
 
+        console.log($(event.target).val());
         let waypntObj={};
         let lat=$(event.target).val().split(",")[0].trim();
         let lng=$(event.target).val().split(",")[1].trim();
@@ -201,14 +202,16 @@ function calculateRoute(directionService,directionsRenderer){
     for(let index=2;index<waypointStorage.length;index++)
     {
         //Converting string value to LatLng type
-        let coordinates=new google.maps.LatLng(waypointStorage[index].lat,waypointStorage[index].lng);
+
+        
+        let coordinates=new google.maps.LatLng(waypointStorage[index].location.lat,waypointStorage[index].location.lng);
         
 
         let waypt={location:coordinates,stopover:true};
         waypts.push(waypt);
     }
     
-
+console.log(waypts);
 
     let request={
         origin:sf,
@@ -230,11 +233,9 @@ function calculateRoute(directionService,directionsRenderer){
         console.log(route);
 
         /*TO DO -Direction in Steps---Need to change to JQUERY--Sample from API documentation */
-        const summaryPanel = document.getElementById(
-            "directions-panel"
-          );
+        const summaryPanel = document.getElementById('directions-panel');
     
-          summaryPanel.innerHTML = "";
+        summaryPanel.innerHTML = "";
     
           // For each route, display summary information.
           for (let i = 0; i < route.legs.length; i++) {
@@ -248,7 +249,13 @@ function calculateRoute(directionService,directionsRenderer){
           
         
     })
-    .catch((e)=>{window.alert("Directions request failed due to "+e.status)});
+    .catch(
+        
+        (e)=>{
+            console.log("Directions request failed due to "+e.status)
+        }
+    
+    );
 }
 
 
@@ -259,12 +266,16 @@ function calculateRoute(directionService,directionsRenderer){
 
 
 let planTripBtn=$('#plan-trip');
-let viewDirectionBtn=$('<button>').html("View Directions");
+let viewDirectionBtn=$('#buttonDiv').html("View Directions");
 let attractionsContainer=$('#attraction-box');
 let carouselContainer=$('#carousel-container');
+let directionsPanel=$('#directions-panel');
 
 
 function updateDisplay(event){
+
+//Hide plan my trip button
+planTripBtn.attr("style","display:none")
 
 //Hide the attractions checklist container
 attractionsContainer.attr("style","display:none");
@@ -272,9 +283,11 @@ attractionsContainer.attr("style","display:none");
 //Display the carousel container
 carouselContainer.attr("style","display:block");
 
+//Display the directions Container and button
 
+viewDirectionBtn.attr("style","display:block");
 
-
+directionsPanel.attr("style","display:block");
 }
 
 /*Question on 2 listeners */

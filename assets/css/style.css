@@ -11,10 +11,8 @@
   --white: white;
   --black: black;
   --card-box: #7D8e95;
-  /* #344648; */
-  /* #7D8e95; */
-  /* #ffbb98 */
-  /* #fbe0c3 */
+  --blue: rgb(2, 0, 138);
+  
 }
 body {
   min-height: 100vh;
@@ -123,7 +121,7 @@ label .checkbox-cover {
   height: 20px;
   border-radius: 50%;
   background: var(--text-color);
-  border: 2px solid var(--white);
+  border: 2px solid var(--blue);
   transition: transform 0.15s, opacity calc(0.15s * 1.2) linear;
   opacity: 0;
   transform: scale(0);
@@ -136,7 +134,7 @@ label .checkbox-cover svg {
   vertical-align: top;
   fill: none;
   margin: 5px 0 0 3px;
-  stroke: var(--white);
+  stroke: var(--blue);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -157,7 +155,7 @@ label .attraction-detail {
     font-size: 8px;
 }
 
-a {
+div a {
     display: flex;
     justify-content: center;
     color: var(--black);
@@ -175,3 +173,5 @@ a {
 #attraction-box {
   height: 300px;
 }
+
+

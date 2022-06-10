@@ -12,7 +12,7 @@
   --black: black;
   --card-box: #7D8e95;
   --blue: rgb(2, 0, 138);
-  
+
 }
 body {
   min-height: 100vh;
@@ -163,6 +163,9 @@ div a {
     font-size: 15px;
 }
 
+button {
+    margin-left: 48%;
+}
 /*Styling for MAP*/
 
 #map {

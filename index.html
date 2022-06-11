@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>California Road Trip Planner</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
+    <!--JQUERY UI ,BOOTSTRAP STYLE LINK-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
-
 <body>
-    <header>
+    <header class="d-flex justify-content-center align-items-center">
         <h1>California Road Trip Planner</h1>
-        <nav></nav>
     </header>
+  
+    <main class="my-6">
 
-    <!--Container for MAP-->
-    <main class="row flex-column">
-        <div class="container map-container">
-            <div id="map"></div>
-        </div>
-        <div class="container" id = "attraction-box">
-          <div class ="row">
-          <div class="col-2 offset-1">
-            <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox1" value="34.031246,-118.788193"/>
-              <label for="checkbox1">
+       <!--Container for MAP-->
+      <div class="container map-container mx-auto my-5 card-container">
+          <div class="row">
+              <div id="map"></div>
+          </div>  
+      </div>
+
+      <div class="container card-container d-flex justify-content-center align-items-center flex-wrap py-4 mb-5" id = "attraction-box">
+        <div class ="row align-items-center justify-content-center">
+            <div class="col-2 mx-1">
+              <div class="attraction-checkbox">
+                <input type="checkbox" id="checkbox1" value="34.031246,-118.788193"/>
+                <label for="checkbox1">
                 <img src="assets/images/Malibu.jpg" alt = "Image of Malibu"/>
                 <span class="checkbox-cover">
                   <svg viewBox="0 0 12 10">
@@ -37,84 +40,80 @@
                 </span>
                 <a href = "http://malibupier.com/" target="_blank">Malibu</a>
                 <div class="attraction-detail">Malibu Pier</div>
-              </label>
+                </label>
+              </div>
             </div>
-        </div>
 
+            <div class="col-2 mx-1">
+              <div class="attraction-checkbox">
+                <input type="checkbox" id="checkbox2" value="34.456936,-119.254440" />
+                <label for="checkbox2">
+                  <img src="assets/images/Ojai.webp" alt="Image of Ojai" />
+                  <span class="checkbox-cover">
+                    <svg viewBox="0 0 12 10">
+                      <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                    </svg>
+                  </span>
+                  <a href="https://www.ojaivalleyinn.com/" target="_blank">Ojai</a>
+                  <div class="attraction-detail">Ojai Valley Inn</div>
+                </label>
+              </div>
+            </div>
       
-          <div class="col-2">
+            <div class="col-2 mx-1">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox2" value="34.456936,-119.254440"/>
-              <label for="checkbox2">
-                <img src="assets/images/Ojai.webp" alt = "Image of Ojai"/>
-                <span class="checkbox-cover">
-                  <svg viewBox="0 0 12 10">
-                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                  </svg>
-                </span>
-                <a href = "https://www.ojaivalleyinn.com/" target="_blank">Ojai</a>
-                <div class="attraction-detail">Ojai Valley Inn</div>
-              </label>
-            </div>
-          </div>
- 
-
-        
-          <div class="col-2">
-            <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox3" value="34.420830,-119.698189"/>
+              <input type="checkbox" id="checkbox3" value="34.420830,-119.698189" />
               <label for="checkbox3">
-                <img src="assets/images/Santa-Barbara.jpg" alt = "Image of Santa Barbara"/>
+                <img src="assets/images/Santa-Barbara.jpg" alt="Image of Santa Barbara" />
                 <span class="checkbox-cover">
                   <svg viewBox="0 0 12 10">
                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                   </svg>
                 </span>
-                <a href = "https://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/downtown-santa-barbara/state-street-promenade/" target="_blank">Santa Barbara</a>
+                <a href="https://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/downtown-santa-barbara/state-street-promenade/"
+                  target="_blank">Santa Barbara</a>
                 <div class="attraction-detail">State Street Promenade</div>
               </label>
             </div>
-          </div>
-    
-
-       
-          <div class="col-2">
+            </div>
+         
+            <div class="col-2 mx-1">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox4" value="34.5897,-120.1372"/>
+              <input type="checkbox" id="checkbox4" value="34.5897,-120.1372" />
               <label for="checkbox4">
-                <img src="assets/images/Solvang.jpg" alt = "Image of Solvang"/>
+                <img src="assets/images/Solvang.jpg" alt="Image of Solvang" />
                 <span class="checkbox-cover">
                   <svg viewBox="0 0 12 10">
                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                   </svg>
                 </span>
-                <a href = "https://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/beyond-the-south-coast/solvang/" target="_blank">Solvang</a>
+                <a href="https://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/beyond-the-south-coast/solvang/"
+                  target="_blank">Solvang</a>
                 <div class="attraction-detail">Danish Town</div>
               </label>
             </div>
-          </div>
+            </div>
      
-
-     
-          <div class="col-2 five">
+            <div class="col-2 mx-1">
             <div class="attraction-checkbox">
-              <input type="checkbox" id="checkbox5" value="35.370781,-120.851173"/>
+              <input type="checkbox" id="checkbox5" value="35.370781,-120.851173" />
               <label for="checkbox5">
-                <img src="assets/images/Morro-Bay.jpg" alt = "Image of Morro Bay"/>
+                <img src="assets/images/Morro-Bay.jpg" alt="Image of Morro Bay" />
                 <span class="checkbox-cover">
                   <svg viewBox="0 0 12 10">
                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                   </svg>
                 </span>
-                <a href = "https://www.morro-bay.ca.us/383/Morro-Rock-Beach" target="_blank">Morro Bay</a>
+                <a href="https://www.morro-bay.ca.us/383/Morro-Rock-Beach" target="_blank">Morro Bay</a>
                 <div class="attraction-detail">Morro Rock</div>
               </label>
             </div>
-          </div>
-          </div>  
+            </div>
+        </div>
+        <!--Row -2-->
+        <div class="row align-items-center justify-content-center"> 
 
-          <div class = "row"> 
-          <div class="col-2  offset-1">
+          <div class="col-2 mx-1">
             <div class="attraction-checkbox">
               <input type="checkbox" id="checkbox6" value="35.640556,-120.680008"/>
               <label for="checkbox6">
@@ -129,9 +128,8 @@
               </label>
             </div>
           </div>
-    
 
-        <div class="col-2">
+          <div class="col-2 mx-1">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox7" value="36.1045,-121.6222" />
             <label for="checkbox7">
@@ -145,9 +143,9 @@
               <div class="attraction-detail">Post Ranch Inn</div>
             </label>
           </div>
-        </div>
+          </div>
 
-        <div class="col-2">
+          <div class="col-2 mx-1">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox8" value="36.555241,-121.923286"/>
             <label for="checkbox8">
@@ -161,8 +159,9 @@
               <div class="attraction-detail">17 Mile Drive</div>
             </label>
           </div>
-        </div>
-        <div class="col-2">
+          </div>
+        
+          <div class="col-2 mx-1">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox9" value="36.974117,-122.030792"/>
             <label for="checkbox9">
@@ -176,9 +175,9 @@
               <div class="attraction-detail">Pleasure Point</div>
             </label>
           </div>
-        </div>
+          </div>
 
-        <div class="col-2">
+          <div class="col-2 mx-1">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox10" value="37.463552,-122.428586"/>
             <label for="checkbox10">
@@ -192,18 +191,39 @@
               <div class="attraction-detail">Mavericks</div>
             </label>
           </div>
+          </div>
+  
         </div>
-        <!-- </div>
-        </div> -->
-       
-    </main>
-
-
-    <!-- Removed the hyperlink -->
-    <button id="plan-trip">Plan My Trip</button>
-
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12">
+            <button id="plan-trip" class="btn ">Plan My Trip</button>
+          </div>
+        </div>
+        
+      </div>  
+   </main>
+    
       <!--The below elements will be hidden-->
-   
+    <section id="buttonSection" class="hide container m-auto">
+      <div class="row d-flex  align-items-center">
+        <div class="col-sm-12 col-md-6 d-flex">
+          <!--Added bootstrap attributes for modal component-->
+          <button id="back-button" class="btn w-100 text-white">Go Back</button>
+        </div>
+        <div class="col-sm-12 col-md-6 d-flex">
+          <button id="view-direction-button" class="btn w-100 text-white">View Directions</button>
+        </div>
+      </div>
+    </section>
+
+<!--JQUERY UI Widget DIalog Confirm Box-->    
+ <section class="container" id="dialog-section">  
+  <div id="dialog-confirm" title="Directions">
+    <p id="directions-panel"></p>
+  </div>
+</section> 
+
+   <!-- <div class="row">
     <div class="hide">  
       <div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
         <h3 class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
@@ -217,13 +237,41 @@
         </div>
       </div>
     </div> 
-   
+  </div> --> 
+<!--Carousel Test Container-->
+
+ <section class="container bg-black hide" id="carousel-section">  
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"  id="carousel-container">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="..." alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="..." alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="..." alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <!-- JQUERY UI WIDGET DIALOG CONFIRMATION COMPONENT  -->
+
+    <div id="dialog-confirm-back" title="Go Back">
+      <p>Are you sure you want to leave the page ?</p>
+    </div>
 
 
-          
-    <div class = "hide" id="carousel-container">Carousel Data</div>
-
-
+  </section>
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <scrip src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!--
@@ -239,10 +287,11 @@
     -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="assets/js/Modal.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/Modal.js" ></script>
+    <script src="assets/js/script.js" ></script>
 </body>
 
 </html>

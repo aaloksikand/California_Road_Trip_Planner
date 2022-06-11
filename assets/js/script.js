@@ -170,6 +170,14 @@ directionsRenderer.setMap(map);
 
 
 
+let planTripBtn=$('#plan-trip');
+let attractionsContainer=$('#attraction-box');
+
+let buttonContainer=$("#buttonSection");
+let carouselContainer=$('#carousel-section');
+
+let viewDirectionBtn=$('#view-direction-button');
+
 /* Event Handler -
 On click event Plan My Trip Button will execute the calculate Route function  
 */
@@ -202,113 +210,217 @@ function calculateRoute(directionService,directionsRenderer){
     for(let index=2;index<waypointStorage.length;index++)
     {
         //Converting string value to LatLng type
-
-        
         let coordinates=new google.maps.LatLng(waypointStorage[index].location.lat,waypointStorage[index].location.lng);
         
-
         let waypt={location:coordinates,stopover:true};
         waypts.push(waypt);
     }
     
-console.log(waypts);
 
-    let request={
-        origin:sf,
-        destination:la,
-        waypoints:waypts,
+/*************DIRECTION SERVICES OF DIRECTION API***********************/
+
+/*Uses directionService to generate a route based on the request and render the response using directionsRenderer */
+
+
+    let request = {
+
+        origin: sf,
+        destination: la,
+        waypoints: waypts,
         optimizeWaypoints: true,
-        travelMode:google.maps.TravelMode.DRIVING
+        travelMode: google.maps.TravelMode.DRIVING,
+
     };
 
-
-/*TO DO Direction Steps in a Bootstrap Pop Up box */
 
     directionService
     .route(request)
     .then((response)=>{
+
         directionsRenderer.setDirections(response);
 
         const route=response.routes[0];
         console.log(route);
 
         /*TO DO -Direction in Steps---Need to change to JQUERY--Sample from API documentation */
+
+         // Below code will write the route info into a JQUERY UI widget or 
+        //if an exception occurs while generating directions
+
         const summaryPanel = document.getElementById('directions-panel');
-    
         summaryPanel.innerHTML = "";
     
-          // For each route, display summary information.
+         
           for (let i = 0; i < route.legs.length; i++) {
             const routeSegment = i + 1;
-    
             summaryPanel.innerHTML +=
-              "<b>Route Segment: " + routeSegment + "</b><br>";
+              "<strong>Route Segment: " + routeSegment + "</strong><br>";
             summaryPanel.innerHTML += route.legs[i].start_address + " to ";
             summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
-            summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";}
-          
-        
+            summaryPanel.innerHTML += route.legs[i].distance.text + "<br>";}
     })
     .catch(
-        
         (e)=>{
-            console.log("Directions request failed due to "+e.status)
+            summaryPanel.innerHTML="Directions request failed due to "+e.status;
         }
     
     );
 }
 
+/* GO BACK BUTTON Event Handler and Functionality */
+
+let backBtn=document.getElementById('back-button');
+backBtn.addEventListener('click',function(){
+
+    $( "#dialog-confirm-back" ).dialog('open');
+});
+
+/*
+- Remove the directions/route from map as well 
+- Remove all markers on the map except the start and stop 
+- Display the attractions list & button
+
+*/
+function resetMap(){
+     
+    //Remove Map route
+    directionsRenderer.setMap(null);
+    
+    //Remove the markers except the start and stop
+    for(let index=2;index<markers.length;index++){
+        markers[index].setMap(null);
+    }
+
+    /*Display attractions and plan trip button */
+    attractionsContainer.removeClass('hide');
+  
+    /*Hide Carousel and Button container */
+    buttonContainer.addClass('hide');
+    carouselContainer.addClass('hide');
+
+    /*Unselects the chcekboxes */
+    $("#attraction-box input[type='checkbox']").prop('checked',false);
+   
+}
+
+
+
+
+
+
+
+
+
+/* 
+    Function will hide plan my trip button,attraction list and 
+    display the go back button,directions button  and carousel
+*/
+
+function updateDisplay(event){
+
+// //Hide plan my trip button
+// planTripBtn.addClass('hide');
+
+//Hide the attractions checklist container and plan trip button
+attractionsContainer.addClass('hide');
+
+// document.querySelector('#attractionsContainer input[type="checkbox"]').setAttribute('checked','false')
+//Display the directions Container and button
+
+buttonContainer.removeClass('hide');
+
+carouselContainer.removeClass('hide');
+}
+
+/*click event handler on Plan Trip Event */
+planTripBtn.click(updateDisplay);
+
+
+function displayDirections(){
+    $( "#dialog-confirm" ).dialog('open');
+}
+
+viewDirectionBtn.click(displayDirections);
+
+
+
+
+/***********************DIALOG BOX USING JQUERY UI WIDGETS **********/
+//FROM MODAL JS
+
+$( function() {
+
+    /*This will create dialog box with Close and Print button*/
+    
+        $( "#dialog-confirm" ).dialog({
+          resizable: false,
+          height: "auto",
+          width: "auto",
+          modal: true,
+          buttons: {
+            " Print ": function() {
+              window.print();  
+              $( this ).dialog( "close" ); /*TO DO print functionality */
+            },
+            Cancel: function() {
+              $( this ).dialog( "close" );
+            }
+          }
+        });
+    
+      console.log( $( "#dialog-confirm-back" ).dialog({
+            resizable: false,
+            height: "auto",
+            width: "auto",
+            modal: true,
+            buttons: {
+              " Yes ": function() {
+                resetMap();  //Call the reset Function
+                $( this ).dialog( "close" ); 
+                
+              },
+              " No ": function() {
+                $( this ).dialog( "close" );
+                return;
+              }
+            }
+          }));
+    
+         
+    
+        
+    /*This will hide the  the Dialog Box when Page Loads */
+        $( "#dialog-confirm" ).dialog('close');
+        $( "#dialog-confirm-back").dialog('close');
+   
+});  
 
 
 };
 
 
-
-
-let planTripBtn=$('#plan-trip');
-let viewDirectionBtn=$('#buttonDiv').html("View Directions");
-let attractionsContainer=$('#attraction-box');
-let carouselContainer=$('#carousel-container');
-let directionsPanel=$('#directions-panel');
-
-
-function updateDisplay(event){
-
-//Hide plan my trip button
-planTripBtn.attr("style","display:none")
-
-//Hide the attractions checklist container
-attractionsContainer.attr("style","display:none");
-
-//Display the carousel container
-carouselContainer.attr("style","display:block");
-
-//Display the directions Container and button
-
-$(".hide").removeClass("hide");
-
-directionsPanel.attr("style","display:block");
-}
-
-/*Question on 2 listeners */
-planTripBtn.click(updateDisplay);
-
-
-
-
-/* Adding / Removing Markers When user selects the checkbox using JQuery*/
-
-var checkBoxList = $('.attraction-checkbox')
-
-checkBoxList.on('checked',function(event){
-
-    console.log(event.target);
-});
-console.log(checkBoxList);
-
 /*TO DO*/
-/*Center Changing while zooming & title */
-/*Changing Titles,Printig Direction */
-/*Add Map Type as Road */
-/*/*TO DO --- We need a back button to come back to the start page */ 
-/*Start with Places/Hotels API */
+/*
+Checking * sign of the dialog box
+-Adding Title for attractions
+-Adding Printig feature  ---DONE
+-Add Map Type as Road 
+--- We need a back button to come back to the start page  --DONE
+
+--Start with Places/Hotels API 
+--Saving the Route --Wishlist
+--Try Yelp API
+*/
+//YELP API
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': 'ff2f07f96dmsh9dceec907ecfccep179252jsn46ebfd60a30a',
+// 		'X-RapidAPI-Host': 'yelp-com.p.rapidapi.com'
+// 	}
+// };
+
+// fetch('https://yelp-com.p.rapidapi.com/search/nearby/37.788719679657554/-122.40057774847898?radius=5&term=Restaurants&offset=0', options)
+// 	.then(response => response.json())
+// 	.then(response => console.log(response))
+// 	.catch(err => console.error(err))

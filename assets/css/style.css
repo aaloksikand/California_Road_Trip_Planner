@@ -7,50 +7,54 @@
 
 /*CSS Variables assign to root*/
 :root {
-  --body-background-color: #fbe0c3;
-  --header-background-color: #344648;;
+  /* --body-background-color: #fbe0c3; */
+  --body-background-color:#F8EFEA;
+  /* --header-background-color: #344648; */
+  --header-background-color: #3D5F5B;
   --white: #fff;
   --black: #000;
-  --card-box: #7D8e95;
+  --card-box: #BACEC1;
   --blue: rgb(2, 0, 138);
+  --button-color:#1D3124;
+  
 }
 
 body {
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  
+  min-height: 110vh;
+  /* width: 100%; */
+   overflow-x: hidden;
+  overflow-y: scroll;  
   background-color: var(--body-background-color);
 }
 
 header {
   background-color: var(--header-background-color);
   color: var(--white);
-  top: 0;
-  height: 100px;
-  display: flex;
+  /* top: 0; */
+  height: 110px;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
-main {
+/* main {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 /* styling for all the card containers */
-.container {
+.card-container {
 
   background-color: var(--card-box);
   box-shadow: 0 0 10px 2px;
-  display: flex;
+ 
+  /* display: flex;
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  margin: 20px;
-}
+  margin: 20px; */
+} 
 
 .attraction-checkbox {
 
@@ -60,8 +64,8 @@ main {
   box-shadow: 0 5px 5px var(--black);;
   background: var(--white);
   transition: transform 0.15s;
-  justify-content: space-evenly;
-  align-items: center;
+  /* justify-content: space-evenly;
+  align-items: center; */
 }
 
 .attraction-checkbox:first-of-type {
@@ -170,19 +174,24 @@ div a {
 }
 
 
-button {
-    margin-left: 48%;
+button,.btn {
+    /* margin-left: 48%; */
+ 
+  background-color: var(--header-background-color);
 }
 /*Additions on 06-10*/
 /*Styling for MAP*/
 
-#map {
+#map{
   height: 600px;
   width: 100%;
+  padding:-3rem;
+  margin:-3rem;
+  margin:auto;
 }
 
 #attraction-box {
-  height: 300px;
+  height: 380px;
 }
 
 #accordion {
@@ -192,7 +201,31 @@ button {
 /*Initially Display is set as none for carousel,Directions button adn directons panel*/
 
 .hide {
-    display: none;
+    display: none !important;
+}
+
+/*Carousel Container*/
+
+#carousel-container{
+
+  height:300px;
+  background-color: #000;
 }
 
 
+/* OVERRIDING JQUERY UI WIDGET STYLING */
+.ui-dialog .ui-dialog-content{
+  background-color: var(--body-background-color);
+}
+.ui-dialog-titlebar,.ui-dialog-buttonpane{
+  background-color: var(--header-background-color);
+  color: var(--white);
+}
+
+.ui-dialog-titlebar-close {
+  color: var(--white);
+}
+.ui-dialog-buttonpane  button {
+  padding: 0 0.7rem;
+
+}

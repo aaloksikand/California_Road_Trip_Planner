@@ -285,7 +285,7 @@ carouselContainer.attr("style","display:block");
 
 //Display the directions Container and button
 
-viewDirectionBtn.attr("style","display:block");
+$(".hide").removeClass("hide");
 
 directionsPanel.attr("style","display:block");
 }

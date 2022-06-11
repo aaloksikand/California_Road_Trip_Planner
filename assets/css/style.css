@@ -185,9 +185,14 @@ button {
   height: 300px;
 }
 
-
+#accordion {
+  width: 66%;
+  margin-left: 17%;
+}
 /*Initially Display is set as none for carousel,Directions button adn directons panel*/
 
-#carousel-container,#directions-panel,#buttonDiv{
+.hide {
     display: none;
 }
+
+

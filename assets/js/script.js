@@ -397,30 +397,3 @@ $( function() {
 
 
 };
-
-
-/*TO DO*/
-/*
-Checking * sign of the dialog box
--Adding Title for attractions
--Adding Printig feature  ---DONE
--Add Map Type as Road 
---- We need a back button to come back to the start page  --DONE
-
---Start with Places/Hotels API 
---Saving the Route --Wishlist
---Try Yelp API
-*/
-//YELP API
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': 'ff2f07f96dmsh9dceec907ecfccep179252jsn46ebfd60a30a',
-// 		'X-RapidAPI-Host': 'yelp-com.p.rapidapi.com'
-// 	}
-// };
-
-// fetch('https://yelp-com.p.rapidapi.com/search/nearby/37.788719679657554/-122.40057774847898?radius=5&term=Restaurants&offset=0', options)
-// 	.then(response => response.json())
-// 	.then(response => console.log(response))
-// 	.catch(err => console.error(err))

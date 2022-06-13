@@ -1,10 +1,35 @@
+//GOOGLE's MAPS JAVASCRIPT API used to customize map with your content
+//DIRECTION Services of Maps Javascript API is used to calculate the directions and return an efficient path. 
+
+
+
 
 
 /*
-InitMap function to initialize the map with following properties
+Function will invoked once the API is loaded 
 */
 
 function initMap() {
+
+/* Variable declaration */
+let checkBoxList = $('input[type=checkbox]');
+
+
+const directionService=new google.maps.DirectionsService();
+const directionsRenderer=new google.maps.DirectionsRenderer();
+
+/*HTML ELement Variables */
+let planTripBtn=$('#plan-trip');
+let attractionsContainer=$('#attraction-box');
+
+let buttonContainer=$("#buttonSection");
+let carouselContainer=$('#carousel-section');
+let backBtn=$('#back-button');
+let viewDirectionBtn=$('#view-direction-button');
+let dirPanel = document.getElementById('directions-panel');
+
+
+ //Creates a Map object with zoom abd restriction bounds
 
   //Coordinates for LA
   const la = { lat: 34.052235, lng: -118.243683 };
@@ -17,12 +42,10 @@ function initMap() {
       north:45,
       south:30,
       west:-130,
-      east:110
+      east:1103
   };
 
   
-
-
   const map= new google.maps.Map(
     document.getElementById('map'),
     {
@@ -36,62 +59,55 @@ function initMap() {
         }
     });
 
-    //Function to create marker at the location on the map and return the marker object
+//Function to create marker at the location on the map and return the marker object
 
     function addMarker(location){
 
         const marker=new google.maps.Marker(
             {
                 position:location,
-                map:map,
-                
-                           
+                map:map,             
             }
         );
         return marker;
     }
 
+ //Creates marker for SF and LA location on the map
+
     let originMark=addMarker(la);
     let destMark=addMarker(sf);
 
-/*Added Drop Animation only for start and stop markers */
+//DROP animation for the the markers
 
     originMark.setAnimation(google.maps.Animation.DROP) ;
     destMark.setAnimation(google.maps.Animation.DROP) ;
 
 
-//waypoints and markers array with start and origin location(la,sf)
+//waypoints array to store location coordinates and markers array for tracking markers
+//Initial stor LA and SF details
+
 let waypoints=[{location:la,stopover:true},{location:sf,stopover:true}];
 let markers=[originMark,destMark];
 
 /*
+CHECKBOX CLICK EVENT HANDLER
+
 When User selects the checkbox,marker should get added to the map
 And when they unselect the marker should get removed.
-Also the entries shoudl be updated in waypoints array
+Also the entries should be updated in waypoints array
 */
 
-let checkBoxList = $('input[type=checkbox]');
 
 checkBoxList.click(function(event){
-    
-
-    /*
-    Fetch the value only if the checkbox is selected and convert to Number and assign to an object
-    with stopOver as true and  is pushed to waypoints array
-    */
-    
-   
 
     if($(this).prop('checked')){
 
-        console.log($(event.target).val());
         let waypntObj={};
         let lat=$(event.target).val().split(",")[0].trim();
         let lng=$(event.target).val().split(",")[1].trim();
 
         let latlngObj={"lat":lat,"lng":lng};
 
-        //Waypoint object with stop over property so that it ca
          waypntObj={
              location:latlngObj
         }
@@ -99,7 +115,7 @@ checkBoxList.click(function(event){
         waypoints.push(waypntObj);  
 
         //Adding marker for respective waypoints/attractions user selects to the map and array
-        //Converted to LatLng as the lat and lng values from object exist in string
+        //Converted to LatLng as the lat and lng values from HTML checklist value is type string
 
         let latLng=new google.maps.LatLng(lat,lng);
         markers.push(addMarker(latLng));
@@ -112,7 +128,7 @@ checkBoxList.click(function(event){
 
        for(let index=0;index<waypoints.length;index++){
        
-        //Verify if the selected element is removed from the array
+        //Identify the selected location coordinates from array
          if(Object.values(waypoints[index].location).join(",")===$(this).val()){
             
             waypoints.splice(index,1);    
@@ -120,90 +136,49 @@ checkBoxList.click(function(event){
             markers[index].setMap(null); 
              markers.splice(index,1); 
 
-            
-
          }
         }
         
  
     }
-
     
 });
     
 
+/*  PLAN MY TRIP  BUTTON Click Event Listener
 
+When User clicks on the Plan My Trip Button
 
+-DirectionsRenderer set the map attribute as map object
+-Save the coordinates array to local storage using saveToStorage fn
+-Map should get updated with the stops(fetched from local storage) and Route highlighted using calculateRoute
+-Go Back Button  , View Directions Button  and Carousel with hotel/restaurant details will appear using update display
 
-/*  Using DIRECTION Services of Maps Javascript API  -
-
-To create a route map with route highlightd joining the stops and generate directions
-
-API String 
-
-https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=YOUR_API_KEY
-
-TO DO:
-
-Displaying Text Directions With setPanel() -To View /Print teh Directions
-
-Steps:
-
-
--When User clicks on the Plan My Trip Button
--Map should get updated with the stops(fetched from local storage) and Route highlighted
--Button/Link to View Text Directions will appear
--Existing Attraction Div Should Disappear and Carousel should appear
-
-
-*/
-
-/* 
-PLAN MY TRIP Click Event Listener
  */
-//Display Map with all the selected attraction as stops and route highlighted
-
-const directionService=new google.maps.DirectionsService();
-
-const directionsRenderer=new google.maps.DirectionsRenderer();
 
 
-
-
-let planTripBtn=$('#plan-trip');
-let attractionsContainer=$('#attraction-box');
-
-let buttonContainer=$("#buttonSection");
-let carouselContainer=$('#carousel-section');
-
-let viewDirectionBtn=$('#view-direction-button');
-
-/* Event Handler -
-On click event Plan My Trip Button will execute the calculate Route function  
-*/
 planTripBtn.click(()=>{
+
     directionsRenderer.setMap(map);
     saveToStorage();
     calculateRoute(directionService,directionsRenderer);
+    updateDisplay();
 });
+
 
 //Save the list of attractions/waypoints array to local storage
 
 function saveToStorage(){
-
-localStorage.setItem("waypoints",JSON.stringify(waypoints));
-
-}
+    localStorage.setItem("waypoints",JSON.stringify(waypoints));  
+    }
 
 /* 
-
-calculateRoute  function  which make use of directionService and directionsRenederer of Google's Directions API
-to create the route using route method from the request and render it on the map using setDirections method.
-
+Fetches the coordimates from the storage and add it to waypts object with location as key and stopover property as true
 */
+
 function calculateRoute(directionService,directionsRenderer){
 
-    //Waypoints is an array of objects with location (object with lat ,lng keys) and stopover flag.
+    //waypts is an array of objects with location (object with lat ,lng  as keys) and stopover flag.
 
     let waypointStorage=JSON.parse(localStorage.getItem("waypoints"));
     const waypts=[]
@@ -218,13 +193,8 @@ function calculateRoute(directionService,directionsRenderer){
     }
     
 
-/*************DIRECTION SERVICES OF DIRECTION API***********************/
-
-/*Uses directionService to generate a route based on the request and render the response using directionsRenderer */
-
 
     let request = {
-
         origin: sf,
         destination: la,
         waypoints: waypts,
@@ -239,52 +209,155 @@ function calculateRoute(directionService,directionsRenderer){
     .then((response)=>{
 
         directionsRenderer.setDirections(response);
-
         const route=response.routes[0];
-        console.log(route);
 
-        /*TO DO -Direction in Steps---Need to change to JQUERY--Sample from API documentation */
+        // Below code will write the route info as well as any exception if occirs into a JQUERY UI widget -DIALOG BOX
 
-         // Below code will write the route info into a JQUERY UI widget or 
-        //if an exception occurs while generating directions
-
-        const summaryPanel = document.getElementById('directions-panel');
-        summaryPanel.innerHTML = "";
-    
+        
+        dirPanel.innerHTML = "";
          
           for (let i = 0; i < route.legs.length; i++) {
             const routeSegment = i + 1;
-            summaryPanel.innerHTML +=
+            dirPanel.innerHTML +=
               "<strong>Route Segment: " + routeSegment + "</strong><br>";
-            summaryPanel.innerHTML += route.legs[i].start_address + " to ";
-            summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
-            summaryPanel.innerHTML += route.legs[i].distance.text + "<br>";}
+            dirPanel.innerHTML += route.legs[i].start_address + " to ";
+            dirPanel.innerHTML += route.legs[i].end_address + "<br>";
+            dirPanel.innerHTML += route.legs[i].distance.text + "<br>";}
+
+            /*If received response is succesful,check nearby restaurants using YELP API */
+           
+                checkNearByRestaurants();  //TO DO
+            
+
     })
     .catch(
         (e)=>{
-            summaryPanel.innerHTML="Directions request failed due to "+e.status;
+            dirPanel.innerHTML="Directions request failed due to "+e.status;
         }
     
     );
 }
 
-/* GO BACK BUTTON Event Handler and Functionality */
 
-let backBtn=document.getElementById('back-button');
-backBtn.addEventListener('click',function(){
+/* 
+    Function will hide plan my trip button,attraction list and 
+    display the go back button,directions button  and carousel
+*/
 
+function updateDisplay(event){
+
+    //Hide the attractions checklist container and plan trip button
+    attractionsContainer.addClass('hide');
+    
+    //Display the directions Container and button
+    
+    buttonContainer.removeClass('hide');
+    carouselContainer.removeClass('hide');
+    }
+    
+
+/********YELP API -TO DO*******/
+
+function checkNearByRestaurants(){
+
+let carouselImage=document.querySelector('.carousel-item img')
+let attraction_names=document.querySelectorAll('.attraction-checkbox a');
+
+let limit=3;
+let radius=5000 //radius in meter
+let options={
+
+    headers:{ "Content-Type": "application/json"  ,
+                 "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
+                 "Access-Control-Allow-Origin": "*"
+           }
+}
+
+for(let index=0;index<waypoints.length;index++){
+
+    let name=attraction_names[index].innerHTML;
+    let lat=new google.maps.LatLng(waypoints[index].lat);
+    let lng=waypoints[index].lng;
+    
+    console.log(attraction_names[index].innerHTML);
+    console.log(lat,lng);
+
+    let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}}&limit=${limit}`
+
+    fetch(searchUrl,options).
+then(response=>{
+     return response.json();
+}).
+ then(
+     data=>{
+        carouselImage.innerHTML(data.businesses[0].image_url);
+        $('attraction-name')[index].innerHTML
+       
+//         console.log(data.businesses[0].location);
+//         console.log(data.businesses[0].image_url);
+//         console.log(data.businesses[0].name);
+//         console.log(data.businesses[0].rating);
+    })
+     .catch(e=>{console.log(e)});
+    
+}
+
+// let searchUrl='https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=5000&longitude=-118.243683&latitude=34.052235&limit=3'
+
+// let options={
+
+//     headers:{ "Content-Type": "application/json"  ,
+//                 "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
+//                 "Access-Control-Allow-Origin": "*"
+//             }
+// }
+
+
+// fetch(searchUrl,options).
+// then(response=>{
+//     console.log(response);
+//     return response.json();
+// }).
+// then(
+//     data=>{
+        
+  
+//         console.log(data);
+//         // let url=data.businesses[0].image_url;
+//         // console.log( carouselItem[0]);
+//         // carouselItem[0].setAttributes('src',url);
+//         console.log(data.businesses[0].location);
+//         console.log(data.businesses[0].image_url);
+//         console.log(data.businesses[0].name);
+//         console.log(data.businesses[0].rating);
+    
+//     })
+// .catch(e=>{console.log(e)});
+
+}
+
+
+/* GO BACK BUTTON CLICK HANDLER*/
+
+/*
+When User click the Back Button
+- Remove the directions/route from map 
+- Remove all markers on the map except the start and stop 
+- Display the attractions list & Plan My Trip button
+
+*/ 
+
+
+//Opens the Javascript UI Widget -Dialog Confirmation Box
+
+backBtn.click(()=>{
+   
     $( "#dialog-confirm-back" ).dialog('open');
 });
 
-/*
-- Remove the directions/route from map as well 
-- Remove all markers on the map except the start and stop 
-- Display the attractions list & button
-
-*/
+/*Reset the Map,remove the routes and markers exceopt the start and  stop coordinates */
 function resetMap(){
      
-    //Remove Map route
     directionsRenderer.setMap(null);
     
     //Remove the markers except the start and stop
@@ -301,53 +374,17 @@ function resetMap(){
 
     /*Unselects the chcekboxes */
     $("#attraction-box input[type='checkbox']").prop('checked',false);
-   
 }
 
-
-
-
-
-
-
-
-
-/* 
-    Function will hide plan my trip button,attraction list and 
-    display the go back button,directions button  and carousel
-*/
-
-function updateDisplay(event){
-
-// //Hide plan my trip button
-// planTripBtn.addClass('hide');
-
-//Hide the attractions checklist container and plan trip button
-attractionsContainer.addClass('hide');
-
-// document.querySelector('#attractionsContainer input[type="checkbox"]').setAttribute('checked','false')
-//Display the directions Container and button
-
-buttonContainer.removeClass('hide');
-
-carouselContainer.removeClass('hide');
-}
-
-/*click event handler on Plan Trip Event */
-planTripBtn.click(updateDisplay);
-
-
-function displayDirections(){
-    $( "#dialog-confirm" ).dialog('open');
-}
+/**VIEW DIRECTIONS BUTTON LK HANDLER */
 
 viewDirectionBtn.click(displayDirections);
 
 
 
 
-/***********************DIALOG BOX USING JQUERY UI WIDGETS **********/
-//FROM MODAL JS
+/***********************JQUERY UI WIDGETS-DIALOG BOX **********/
+//Creates the dialog boxes for Go back button and View directions and hide it initially
 
 $( function() {
 
@@ -361,7 +398,7 @@ $( function() {
           buttons: {
             " Print ": function() {
               window.print();  
-              $( this ).dialog( "close" ); /*TO DO print functionality */
+              $( this ).dialog( "close" ); 
             },
             Cancel: function() {
               $( this ).dialog( "close" );
@@ -369,7 +406,7 @@ $( function() {
           }
         });
     
-      console.log( $( "#dialog-confirm-back" ).dialog({
+        $( "#dialog-confirm-back" ).dialog({
             resizable: false,
             height: "auto",
             width: "auto",
@@ -385,19 +422,26 @@ $( function() {
                 return;
               }
             }
-          }));
-    
-         
-    
-        
-    /*This will hide the  the Dialog Box when Page Loads */
+          })
+ 
+    /*Hide the  the Dialog Box when Page Loads */
         $( "#dialog-confirm" ).dialog('close');
         $( "#dialog-confirm-back").dialog('close');
    
 });  
 
+function displayDirections(){
+    $( "#dialog-confirm" ).dialog('open');
+}
+
+
+
+/***********BOOTSTRAP COMPONENTS-CAROUSEL*****/
+
+$('.carousel').carousel();
 
 };
+
 
 
 
@@ -432,18 +476,18 @@ Checking * sign of the dialog box
 
 /*Finds restaurants within the  5000 meter radius ~ 3 miles 	circle:lon,lat,radiusMeters*/
 /*Can we ge image of the restaurant using place id 510fc589543d9a5ec0592fcd678fbce44240f00103f90158dcdb160000000092030f50696e6563726573742044696e6572 */
-fetch('https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=circle:-122.419418,37.774929,5000&limit=3&apiKey=eca584cd84964e56ad212e283e966dab')
-.then((response)=>{
-    return response.json();
-})
-.then(
-    (data)=>{
-        console.log(data);
-        console.log(data.features[0].properties.address_line1);
-        console.log(data.features[0].properties.address_line2);
-        console.log(data.features[0].properties.details);
-    }
-)
+// fetch('https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=circle:-122.419418,37.774929,5000&limit=3&apiKey=eca584cd84964e56ad212e283e966dab')
+// .then((response)=>{
+//     return response.json();
+// })
+// .then(
+//     (data)=>{
+//         console.log(data);
+//         console.log(data.features[0].properties.address_line1);
+//         console.log(data.features[0].properties.address_line2);
+//         console.log(data.features[0].properties.details);
+//     }
+// )
 
 
 
@@ -482,31 +526,6 @@ fetch('https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=
 //   }
 // });
 
-let searchUrl='https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=5000&longitude=-118.243683&latitude=34.052235'
-
-let options={
-
-    headers:{ "Content-Type": "application/json"  ,
-                "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
-                "Access-Control-Allow-Origin": "*"
-            }
-}
-
-fetch(searchUrl,options).
-then(response=>{
-    console.log(response);
-    return response.json();
-}).
-then(
-    data=>{
-        console.log(data.businesses[0].location);
-        console.log(data.businesses[0].image_url);
-        console.log(data.businesses[0].name);
-        console.log(data.businesses[0].rating);
-    
-    }
-    )
-.catch(e=>{console.log(e)});
 
 // const yelp = require('yelp-api');
 
@@ -528,5 +547,8 @@ then(
 //   const prettyJson = JSON.stringify(firstResult, null, 4);
 //   console.log(prettyJson);
 // }).catch(e => {
-//   console.log(e);
+//   cxonsole.log(e);
 // });
+
+
+

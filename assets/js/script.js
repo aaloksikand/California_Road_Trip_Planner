@@ -440,8 +440,6 @@ $('.carousel').carousel();
 };
 
 
-
-
 /*TO DO*/
 /*
 Checking * sign of the dialog box
@@ -549,47 +547,48 @@ Checking * sign of the dialog box
 
 
 
-var apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE";
-var destinationList = ["malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay"]
-var  destinationHotelList= ["best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay"]
+var apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE"; //Google Places API Key
+var destinationList = ["malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay"]  //List of destinations along PCH
+var  destinationHotelList= ["best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay"]  //List of nearest Best Western to destination
 
 
-destinationList.forEach(function(destination){
+
+destinationList.forEach(function(destination){  //forEach function that will loop through destinations list
     listDestinations(destination)
 })
 
-destinationHotelList.forEach(function(hotel){
+destinationHotelList.forEach(function(hotel){  //forEach function that will look through destination Hotels
     listHotels(hotel)
 })
 
-function listDestinations(query){
+function listDestinations(query){  //fetching destination data from the Google Places API
 fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`)
 .then(function(data)
 {
     return data.json()
 }) .then(function(response)
 {
-    var Lat = response.results.geometry.location.lat
-    var Long = response.results.location.lng
-    var PlaceID = response.results.place_id
-    var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
+    var Lat = response.results.geometry.location.lat  //destination latitude
+    var Long = response.results.location.lng  //destination longitude
+    var PlaceID = response.results.place_id  //destination Place ID
+    var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //destination image
 
 })
 }
 
-function listHotels(query){
+function listHotels(query){  //fetching hotel data from the Google Places API
     fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey}`)
     .then(function(data)
     {
         return data.json()
     }) .then(function(response)
     {
-        var Lat = response.results.geometry.location.lat
-        var Long = response.results.location.lng
-        var PlaceID = response.results.place_id
-        var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-        var Name = response.results.name
-        var Address = response.results.formatted_address
+        var Lat = response.results.geometry.location.lat  //hotel latitude
+        var Long = response.results.location.lng  //hotel longitude
+        var PlaceID = response.results.place_id //hotel places id
+        var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //hotel photo
+        var Name = response.results.name  //hotel name
+        var Address = response.results.formatted_address  //hotel address
     })
     }
 

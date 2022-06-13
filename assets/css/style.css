@@ -5,7 +5,7 @@
 }
 
 
-/*CSS Variables assign to root*/
+/*CSS Variables*/
 :root {
   --body-background-color:#F8EFEA;
   --header-background-color: #3D5F5B;
@@ -24,6 +24,7 @@ body {
   background-color: var(--body-background-color);
 }
 
+/* STYLING FOR HEADER */
 header {
   background-color: var(--header-background-color);
   color: var(--white);
@@ -31,7 +32,7 @@ header {
 }
 
 
-/* styling for all the card containers */
+/* STYLING FOR CARD CONTAINERS */
 .card-container {
   background-color: var(--card-box);
   box-shadow: 0 0 10px 2px;
@@ -153,14 +154,16 @@ div a {
 }
 
 
-button,.btn {
+button,.btn{
   background-color: var(--header-background-color);
-  color: var(--white);
+  color:var(--white);
+  
+}
+.btn:hover{
+ color: #f5f5dc;
 }
 
-/*Additions on 06-10*/
 /*Styling for MAP*/
-
 #map{
   height: 600px;
   width: 100%;
@@ -173,17 +176,13 @@ button,.btn {
   height: 380px;
 }
 
-#accordion {
-  width: 66%;
-  margin-left: 17%;
-}
-/*Initially Display is set as none for carousel,Directions button adn directons panel*/
 
 .hide {
     display: none !important;
 }
 
 /*Carousel Container*/
+
 
 .carousel-inner img {
   min-width: 100%;
@@ -199,18 +198,43 @@ button,.btn {
   z-index: 100;
 }
 
+#carousel-container{
+
+  height:600px;
+  background-color: #000;
+}
+
+.carousel-item {
+
+  height:400px;
+  
+  
+}
+.carousel-item img{
+  opacity: 0.5;
+}
+
 /* OVERRIDING JQUERY UI WIDGET STYLING */
 .ui-dialog .ui-dialog-content{
   background-color: var(--body-background-color);
 }
-.ui-dialog-titlebar,.ui-dialog-buttonpane{
+.ui-dialog  .ui-dialog-titlebar,.ui-dialog .ui-dialog-buttonpane{
   background-color: var(--header-background-color);
   color: var(--white);
 }
 
-.ui-dialog-titlebar-close {
+.ui-dialog .ui-dialog-titlebar-close {
   color: var(--white);
+  
 }
+
+.ui-dialog-titlebar-close::after{
+content:'X';
+position: absolute;
+top:-4px;
+left:4px;
+}
+
 .ui-dialog-buttonpane  button {
   padding: 0 0.7rem;
 

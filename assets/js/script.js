@@ -20,6 +20,7 @@ let attractionsContainer=$('#attraction-box');
 
 let buttonContainer=$("#buttonSection");
 let carouselContainer=$('#carousel-section');
+let carouselContainerYelp=$('#carousel-section-yelp');
 let backBtn=$('#back-button');
 let viewDirectionBtn=$('#view-direction-button');
 let dirPanel = document.getElementById('directions-panel');
@@ -247,9 +248,9 @@ function updateDisplay(event){
     attractionsContainer.addClass('hide');
     
     //Display the directions Container and button
-    
     buttonContainer.removeClass('hide');
     carouselContainer.removeClass('hide');
+    carouselContainerYelp.removeClass('hide');
     }
     
 
@@ -586,6 +587,7 @@ function listHotels(query){  //fetching hotel data from the Google Places API
         var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //hotel photo
         var Name = response.results.name  //hotel name
         var Address = response.results.formatted_address  //hotel address
+        
     })
     }
 

@@ -39,7 +39,6 @@ header {
 } 
 
 .attraction-checkbox {
-
   width: 170px;
   height: 130px;
   border-radius: 10px;
@@ -157,10 +156,18 @@ div a {
 button,.btn{
   background-color: var(--header-background-color);
   color:var(--white);
-  
+  width: 200px;
 }
 .btn:hover{
  color: #f5f5dc;
+}
+
+.attBtn {
+  margin-right: 160px;
+}
+
+.attSize {
+  width: 290px;
 }
 
 /*Styling for MAP*/
@@ -173,7 +180,7 @@ button,.btn{
 }
 
 #attraction-box {
-  height: 380px;
+  height: 400px;
 }
 
 
@@ -188,31 +195,19 @@ button,.btn{
   min-width: 100%;
   height:500px;
   margin: 0;
+  background-color: var(--black);
 }
 
-.carousel-control-prev {
-  z-index: 100;
-}
-
-.carousel-control-next {
+.carousel-control-prev
+.carousel-control-next
+#carousel-section {
   z-index: 100;
 }
 
 #carousel-container{
-
   height:600px;
-  background-color: #000;
 }
 
-.carousel-item {
-
-  height:400px;
-  
-  
-}
-.carousel-item img{
-  opacity: 0.5;
-}
 
 /* OVERRIDING JQUERY UI WIDGET STYLING */
 .ui-dialog .ui-dialog-content{
@@ -243,32 +238,48 @@ left:4px;
 @media screen and (max-width: 992px ) {
   .attDirection {
     flex-direction: column;
+    flex-wrap: wrap;
+    width: 180px;
+    margin: 20px;
+    margin-right: 110px;
+  }
+  .attBtn {
+    flex-direction: row;
+    min-width: 300px;
+    margin-left: 80px;
   }
   #attraction-box {
     height: 850px;
   }
 
 }
-@media screen and (max-width: 772px) {
+@media screen and (min-width: 576px) and (max-width: 772px) {
   .container {
     max-width: 600px;
   }
-  
+  #attraction-box {
+    flex-wrap: wrap;
+    height: 1600px;
+  }
+
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 575px) {
   header {
     height: 140px;
   }
   .map-container {
-    width: 400px;
+    width: 500px;
   }
   .container {
     min-width: 300px;
   }
-  .attSize {
-    display: flex;
-    justify-content: center;
+  .attBtn {
+    flex-wrap: wrap;
+    flex-direction: row;
+    min-width: 300px;
+    margin-left: 180px;
   }
-
-
+  #attraction-box {
+    height: 1600px;
+  }
 }

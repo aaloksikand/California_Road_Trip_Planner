@@ -194,25 +194,48 @@ function initMap() {
   /*/*TO DO --- We need a back button to come back to the start page */ 
   /*Start with Places/Hotels API */
 var apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE";
-var malibuAPI;
-var malibuImage;
-var malibuLat;
-var malibuLong;
-var malibuHotel;
-var malibuPlaceID;
-malibuAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=malibu+surfrider+beach&key="+apiKey)
+var destinationList = ["malibu+surfrider+beach", "ojai", ""]
+var  destinationHotelList= ["best+western+malibu"]
+
+
+destinationList.forEach(function(destination){
+    listDestinations(destination)
+})
+
+destinationHotelList.forEach(function(hotel){
+    listHotels(hotel)
+})
+
+function listDestinations(query){
+fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`)
 .then(function(data)
 {
     return data.json()
 }) .then(function(response)
 {
-    console.log(response.results[0].photos[0].photo_reference)
-    malibuLat = response.results.geometry.location.lat
-    malibuLong = response.results.location.lng
-    malibuPlaceID = response.results.place_id
-    malibuImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
+    var Lat = response.results.geometry.location.lat
+    var Long = response.results.location.lng
+    var PlaceID = response.results.place_id
+    var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
 
+})
+}
+
+function listHotels(query){
+    fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey}`)
+    .then(function(data)
+    {
+        return data.json()
+    }) .then(function(response)
+    {
+        var Lat = response.results.geometry.location.lat
+        var Long = response.results.location.lng
+        var PlaceID = response.results.place_id
+        var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
+        var Name = response.results.name
+        var Address = response.results.formatted_address
+    })
+    }
 var bwMalibuImage;
 var bwMalibuLat;
 var bwMalibuLong;
@@ -273,7 +296,7 @@ ojaiHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.c
     bwOjaiName = response.results.name
     bwOjaiAddress = response.results.formatted_address
     bwOjaiPlaceID = response.results.place_id
-}
+})
 
 var santaBarbaraAPI;
 var santaBarbaraImage;
@@ -315,7 +338,7 @@ santaBarbaraHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.goog
     bwSantaBarbaraName = response.results.name
     bwSantaBarbaraAddress = response.results.formatted_address
     bwSantaBarbaraPlaceID = response.results.place_id
-}
+})
 
 var solvangAPI;
 var solvangImage;

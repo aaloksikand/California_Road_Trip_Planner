@@ -3,27 +3,20 @@
 /*
 InitMap function to initialize the map with following properties
 */
-
 function initMap() {
-
-  //Coordinates for LA
-  const la = { lat: 34.052235, lng: -118.243683 };
-  //Coordinates for SF
-  const sf = { lat: 37.774929, lng: -122.419418 };
-  //Coordinates for center-fresno coords
-  const center={lat:36.746841, lng:-119.772591};
-
-  const bounds={
-      north:45,
-      south:30,
-      west:-130,
-      east:110
-  };
-
-  
-
-
-  const map= new google.maps.Map(
+    //Coordinates for LA
+    const la = { lat: 34.052235, lng: -118.243683 };
+    //Coordinates for SF
+    const sf = { lat: 37.774929, lng: -122.419418 };
+    //Coordinates for center-fresno coords
+    const center={lat:36.746841, lng:-119.772591};
+    const bounds={
+        north:45,
+        south:30,
+        west:-130,
+        east:110
+    };
+    const map= new google.maps.Map(
     document.getElementById('map'),
     {
         minZoom:4,
@@ -398,3 +391,54 @@ $( function() {
 
 
 };
+
+var apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE";
+var destinationList = ["malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay"]
+var  destinationHotelList= ["best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay"]
+
+
+destinationList.forEach(function(destination){
+    listDestinations(destination)
+})
+
+destinationHotelList.forEach(function(hotel){
+    listHotels(hotel)
+})
+
+function listDestinations(query){
+fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`)
+.then(function(data)
+{
+    return data.json()
+}) .then(function(response)
+{
+    var Lat = response.results.geometry.location.lat
+    var Long = response.results.location.lng
+    var PlaceID = response.results.place_id
+    var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
+
+})
+}
+
+function listHotels(query){
+    fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey}`)
+    .then(function(data)
+    {
+        return data.json()
+    }) .then(function(response)
+    {
+        var Lat = response.results.geometry.location.lat
+        var Long = response.results.location.lng
+        var PlaceID = response.results.place_id
+        var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
+        var Name = response.results.name
+        var Address = response.results.formatted_address
+    })
+    }
+
+
+
+
+  
+
+  

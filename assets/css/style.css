@@ -42,7 +42,6 @@ main {
 
 /* styling for all the card containers */
 .container {
-
   background-color: var(--card-box);
   box-shadow: 0 0 10px 2px;
   display: flex;
@@ -60,8 +59,6 @@ main {
   box-shadow: 0 5px 5px var(--black);;
   background: var(--white);
   transition: transform 0.15s;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 .attraction-checkbox:first-of-type {
@@ -176,6 +173,10 @@ button {
 /*Additions on 06-10*/
 /*Styling for MAP*/
 
+/* .row {
+  margin: 0;
+} */
+
 #map {
   height: 600px;
   width: 100%;
@@ -185,10 +186,12 @@ button {
   height: 300px;
 }
 
-#accordion {
-  width: 66%;
-  margin-left: 17%;
+#carouselCon {
+  display: flex;
+  justify-content: center;
+  max-height: 300px;
 }
+
 /*Initially Display is set as none for carousel,Directions button adn directons panel*/
 
 .hide {

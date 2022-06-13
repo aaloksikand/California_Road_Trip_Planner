@@ -1,3 +1,5 @@
+
+
 /*
 InitMap function to initialize the map with following properties
 */
@@ -194,8 +196,8 @@ function initMap() {
   /*/*TO DO --- We need a back button to come back to the start page */ 
   /*Start with Places/Hotels API */
 var apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE";
-var destinationList = ["malibu+surfrider+beach", "ojai", ""]
-var  destinationHotelList= ["best+western+malibu"]
+var destinationList = ["malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay"]
+var  destinationHotelList= ["best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay"]
 
 
 destinationList.forEach(function(destination){
@@ -236,435 +238,398 @@ function listHotels(query){
         var Address = response.results.formatted_address
     })
     }
-var bwMalibuImage;
-var bwMalibuLat;
-var bwMalibuLong;
-var bwMalibuHotel;
-var bwMalibuPlaceID;
-var bwMalibuAddress;
 
-malibuHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+malibu&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response)
-{
- bwMalibuImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
- bwMalibuLat = response.results.geometry.lat
- bwMalibuLong = response.results.location.lng
- bwMalibuName = response.results.name
- bwMalibuAddress = response.results.formatted_address
- bwMalibuPlaceID = response.results.place_id
-})
 
-var ojaiAPI;
-var ojaiImage;
-var ojaiLat;
-var ojaiLong;
-var ojaiHotel;
-var ojaiPlaceID;
 
-ojaiAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=ojai&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    ojaiLat = response.results.geometry.location.lat
-    ojaiLong = response.results.location.lng
-    ojaiPlaceID = response.results.place_id
-    ojaiImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
+  //Coordinates for LA
+  const la = { lat: 34.052235, lng: -118.243683 };
+  //Coordinates for SF
+  const sf = { lat: 37.774929, lng: -122.419418 };
+  //Coordinates for center-fresno coords
+  const center={lat:36.746841, lng:-119.772591};
 
-var bwOjaiImage;
-var bwOjaiLat;
-var bwOjaiLong;
-var bwOjaiHotel;
-var bwOjaiPlaceID;
-var bwOjaiAddress;
+  const bounds={
+      north:45,
+      south:30,
+      west:-130,
+      east:110
+  };
 
-ojaiHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+ojai&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response)
-{
-    bwOjaiImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwOjaiLat = response.results.geometry.lat
-    bwOjaiLong = response.results.location.lng
-    bwOjaiName = response.results.name
-    bwOjaiAddress = response.results.formatted_address
-    bwOjaiPlaceID = response.results.place_id
-})
+  
 
-var santaBarbaraAPI;
-var santaBarbaraImage;
-var santaBarbaraLat;
-var santaBarbaraLong;
-var santaBarbaraHotel;
-var santaBarbaraPlaceID;
 
-santaBarbaraAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=santa+barbara&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    santaBarbaraLat = response.results.geometry.location.lat
-    santaBarbaraLong = response.results.location.lng
-    santaBarbaraPlaceID = response.results.place_id
-    santaBarbaraImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
+  const map= new google.maps.Map(
+    document.getElementById('map'),
+    {
+        minZoom:4,
+        maxZoom:8,
+        zoom:6,
+        center:center,
+        restriction:{ 
+            latLngBounds:bounds,
+            strictBounds:false
+        }
+    });
 
-var bwSantaBarbaraImage;
-var bwSantaBarbaraLat;
-var bwSantaBarbaraLong;
-var bwSantaBarbaraName;
-var bwSantaBarbaraHotel;
-var bwSantaBarbaraPlaceID;
-var bwSantaBarbaraAddress;
+    //Function to create marker at the location on the map and return the marker object
 
-santaBarbaraHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+santa+barbara&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response)
-{
-    bwSantaBarbaraImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwSantaBarbaraLat = response.results.geometry.lat
-    bwSantaBarbaraLong = response.results.location.lng
-    bwSantaBarbaraName = response.results.name
-    bwSantaBarbaraAddress = response.results.formatted_address
-    bwSantaBarbaraPlaceID = response.results.place_id
-})
+    function addMarker(location){
 
-var solvangAPI;
-var solvangImage;
-var solvangLat;
-var solvangLong;
-var solvangHotel;
-var solvangPlaceID;
+        const marker=new google.maps.Marker(
+            {
+                position:location,
+                map:map,
+                
+                           
+            }
+        );
+        return marker;
+    }
 
-solvangAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=solvang+danish+town&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    solvangLat = response.results.geometry.location.lat
-    solvangLong = response.results.location.lng
-    solvangPlaceID = response.results.place_id
-    solvangImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
+    let originMark=addMarker(la);
+    let destMark=addMarker(sf);
 
-var bwSolvangImage;
-var bwSolvangLat;
-var bwSolvangLong;
-var bwSolvangHotel;
-var bwSolvangPlaceID;
-var bwSolvangAddress;
+/*Added Drop Animation only for start and stop markers */
 
-solvangHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+solvang&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response))
-{
-    bwSolvangImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwSolvangLat = response.results.geometry.lat
-    bwSolvangLong = response.results.location.lng
-    bwSolvangName = response.results.name
-    bwSolvangAddress = response.results.formatted_address
-    bwSolvangPlaceID = response.results.place_id
+    originMark.setAnimation(google.maps.Animation.DROP) ;
+    destMark.setAnimation(google.maps.Animation.DROP) ;
+
+
+//waypoints and markers array with start and origin location(la,sf)
+let waypoints=[{location:la,stopover:true},{location:sf,stopover:true}];
+let markers=[originMark,destMark];
+
+/*
+When User selects the checkbox,marker should get added to the map
+And when they unselect the marker should get removed.
+Also the entries shoudl be updated in waypoints array
+*/
+
+let checkBoxList = $('input[type=checkbox]');
+
+checkBoxList.click(function(event){
+    
+
+    /*
+    Fetch the value only if the checkbox is selected and convert to Number and assign to an object
+    with stopOver as true and  is pushed to waypoints array
+    */
+    
+   
+
+    if($(this).prop('checked')){
+
+        console.log($(event.target).val());
+        let waypntObj={};
+        let lat=$(event.target).val().split(",")[0].trim();
+        let lng=$(event.target).val().split(",")[1].trim();
+
+        let latlngObj={"lat":lat,"lng":lng};
+
+        //Waypoint object with stop over property so that it ca
+         waypntObj={
+             location:latlngObj
+        }
+
+        waypoints.push(waypntObj);  
+
+        //Adding marker for respective waypoints/attractions user selects to the map and array
+        //Converted to LatLng as the lat and lng values from object exist in string
+
+        let latLng=new google.maps.LatLng(lat,lng);
+        markers.push(addMarker(latLng));
+        
+    
+    }
+    else{
+
+       //Removes the waypoints and its markers from the waypoints Array and the Map
+
+       for(let index=0;index<waypoints.length;index++){
+       
+        //Verify if the selected element is removed from the array
+         if(Object.values(waypoints[index].location).join(",")===$(this).val()){
+            
+            waypoints.splice(index,1);    
+
+            markers[index].setMap(null); 
+             markers.splice(index,1); 
+
+            
+
+         }
+        }
+        
+ 
+    }
+
+    
+});
+    
+
+
+
+
+/*  Using DIRECTION Services of Maps Javascript API  -
+
+To create a route map with route highlightd joining the stops and generate directions
+
+API String 
+
+https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=YOUR_API_KEY
+
+TO DO:
+
+Displaying Text Directions With setPanel() -To View /Print teh Directions
+
+Steps:
+
+
+-When User clicks on the Plan My Trip Button
+-Map should get updated with the stops(fetched from local storage) and Route highlighted
+-Button/Link to View Text Directions will appear
+-Existing Attraction Div Should Disappear and Carousel should appear
+
+
+*/
+
+/* 
+PLAN MY TRIP Click Event Listener
+ */
+//Display Map with all the selected attraction as stops and route highlighted
+
+const directionService=new google.maps.DirectionsService();
+
+const directionsRenderer=new google.maps.DirectionsRenderer();
+
+
+
+
+let planTripBtn=$('#plan-trip');
+let attractionsContainer=$('#attraction-box');
+
+let buttonContainer=$("#buttonSection");
+let carouselContainer=$('#carousel-section');
+
+let viewDirectionBtn=$('#view-direction-button');
+
+/* Event Handler -
+On click event Plan My Trip Button will execute the calculate Route function  
+*/
+planTripBtn.click(()=>{
+    directionsRenderer.setMap(map);
+    saveToStorage();
+    calculateRoute(directionService,directionsRenderer);
+});
+
+//Save the list of attractions/waypoints array to local storage
+
+function saveToStorage(){
+
+localStorage.setItem("waypoints",JSON.stringify(waypoints));
+
 }
 
-var morroBayAPI;
-var morroBayImage;
-var morroBayLat;
-var morroBayLong;
-var morroBayHotel;
-var morroBayPlaceID;
+/* 
 
-morroBayAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=morro+bay&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    morroBayLat = response.results.geometry.location.lat
-    morroBayLong = response.results.location.lng
-    morroBayPlaceID = response.results.place_id
-    morroBayImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
+calculateRoute  function  which make use of directionService and directionsRenederer of Google's Directions API
+to create the route using route method from the request and render it on the map using setDirections method.
 
-var bwmorroBayImage;
-var bwmorroBayLat;
-var bwmorroBayLong;
-var bwmorroBayHotel;
-var bwmorroBayPlaceID;
-var bwmorroBayAddress;
+*/
+function calculateRoute(directionService,directionsRenderer){
 
-morroBayHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+morro+bay&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response))
+    //Waypoints is an array of objects with location (object with lat ,lng keys) and stopover flag.
 
-{
-    bwmorroBayImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwmorroBayLat = response.results.geometry.lat
-    bwmorroBayLong = response.results.location.lng
-    bwmorroBayName = response.results.name
-    bwmorroBayAddress = response.results.formatted_address
-    bwmorroBayPlaceID = response.results.place_id
+    let waypointStorage=JSON.parse(localStorage.getItem("waypoints"));
+    const waypts=[]
+
+    for(let index=2;index<waypointStorage.length;index++)
+    {
+        //Converting string value to LatLng type
+        let coordinates=new google.maps.LatLng(waypointStorage[index].location.lat,waypointStorage[index].location.lng);
+        
+        let waypt={location:coordinates,stopover:true};
+        waypts.push(waypt);
+    }
+    
+
+/*************DIRECTION SERVICES OF DIRECTION API***********************/
+
+/*Uses directionService to generate a route based on the request and render the response using directionsRenderer */
+
+
+    let request = {
+
+        origin: sf,
+        destination: la,
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.DRIVING,
+
+    };
+
+
+    directionService
+    .route(request)
+    .then((response)=>{
+
+        directionsRenderer.setDirections(response);
+
+        const route=response.routes[0];
+        console.log(route);
+
+        /*TO DO -Direction in Steps---Need to change to JQUERY--Sample from API documentation */
+
+         // Below code will write the route info into a JQUERY UI widget or 
+        //if an exception occurs while generating directions
+
+        const summaryPanel = document.getElementById('directions-panel');
+        summaryPanel.innerHTML = "";
+    
+         
+          for (let i = 0; i < route.legs.length; i++) {
+            const routeSegment = i + 1;
+            summaryPanel.innerHTML +=
+              "<strong>Route Segment: " + routeSegment + "</strong><br>";
+            summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+            summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
+            summaryPanel.innerHTML += route.legs[i].distance.text + "<br>";}
+    })
+    .catch(
+        (e)=>{
+            summaryPanel.innerHTML="Directions request failed due to "+e.status;
+        }
+    
+    );
 }
 
-var pasoRoblesAPI;
-var pasoRoblesImage;
-var pasoRoblesLat;
-var pasoRoblesLong;
-var pasoRoblesHotel;
-var pasoRoblesPlaceID;
+/* GO BACK BUTTON Event Handler and Functionality */
 
-pasoRoblesAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=paso+robles&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    pasoRoblesLat = response.results.geometry.location.lat
-    pasoRoblesLong = response.results.location.lng
-    pasoRoblesPlaceID = response.results.place_id
-    pasoRoblesImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
+let backBtn=document.getElementById('back-button');
+backBtn.addEventListener('click',function(){
 
-var bwPasoRoblesImage;
-var bwPasoRoblesLat;
-var bwPasoRoblesLong;
-var bwPasoRoblesHotel;
-var bwPasoRoblesPlaceID;
-var bwPasoRoblesAddress;
+    $( "#dialog-confirm-back" ).dialog('open');
+});
 
-pasoRoblesHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+paso+robles&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response))
+/*
+- Remove the directions/route from map as well 
+- Remove all markers on the map except the start and stop 
+- Display the attractions list & button
 
-{
-    bwPasoRoblesImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwPasoRoblesLat = response.results.geometry.lat
-    bwPasoRoblesLong = response.results.location.lng
-    bwPasoRoblesName = response.results.name
-    bwPasoRoblesAddress = response.results.formatted_address
-    bwPasoRoblesPlaceID = response.results.place_id
-}
+*/
+function resetMap(){
+     
+    //Remove Map route
+    directionsRenderer.setMap(null);
+    
+    //Remove the markers except the start and stop
+    for(let index=2;index<markers.length;index++){
+        markers[index].setMap(null);
+    }
 
-var bigSurAPI;
-var bigSurImage;
-var bigSurLat;
-var bigSurLong;
-var bigSurHotel;
-var bigSurPlaceID;
+    /*Display attractions and plan trip button */
+    attractionsContainer.removeClass('hide');
+  
+    /*Hide Carousel and Button container */
+    buttonContainer.addClass('hide');
+    carouselContainer.addClass('hide');
 
-bigSurAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=big+sur&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    bigSurLat = response.results.geometry.location.lat
-    bigSurLong = response.results.location.lng
-    bigSurPlaceID = response.results.place_id
-    bigSurImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
-
-var bwBigSurImage;
-var bwBigSurLat;
-var bwBigSurLong;
-var bwBigSurHotel;
-var bwBigSurPlaceID;
-var bwBigSurAddress;
-
-bigSurHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+big+sur&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response))
-
-{
-    bwbigSurImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwbigSurLat = response.results.geometry.lat
-    bwbigSurLong = response.results.location.lng
-    bwbigSurName = response.results.name
-    bwbigSurAddress = response.results.formatted_address
-    bwbigSurPlaceID = response.results.place_id
-}
-
-var carmelAPI;
-var carmelImage;
-var carmelLat;
-var carmelLong;
-var carmelHotel;
-var carmelPlaceID;
-
-carmelAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=carmel+by+the+sea&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    carmelLat = response.results.geometry.location.lat
-    carmelLong = response.results.location.lng
-    carmelPlaceID = response.results.place_id
-    carmelImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
-
-
-var bwCarmelImage;
-var bwCarmelLat;
-var bwCarmelLong;
-var bwCarmelHotel;
-var bwCarmelPlaceID;
-var bwCarmelAddress;
-
-carmelHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+carmel+by+the+sea&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response));
-{
-    bwCarmelImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwCarmelLat = response.results.geometry.lat
-    bwCarmelLong = response.results.location.lng
-    bwCarmelName = response.results.name
-    bwCarmelAddress = response.results.formatted_address
-    bwCarmelPlaceID = response.results.place_id
-}
-
-var santaCruzAPI;
-var santaCruzImage;
-var santaCruzLat;
-var santaCruzLong;
-var santaCruzHotel;
-var santaCruzPlaceID;
-
-santaCruzAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=santa+cruz&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    santaCruzLat = response.results.geometry.location.lat
-    santaCruzLong = response.results.location.lng
-    santaCruzPlaceID = response.results.place_id
-    santaCruzImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
-
-var bwSantaCruzImage;
-var bwSantaCruzLat;
-var bwSantaCruzLong;
-var bwSantaCruzHotel;
-var bwSantaCruzPlaceID;
-var bwSantaCruzAddress;
-
-santaCruzHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+santa+cruz&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response));
-
-{
-
-    bwSantaCruzImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwSantaCruzLat = response.results.geometry.lat
-    bwSantaCruzLong = response.results.location.lng
-    bwSantaCruzName = response.results.name
-    bwSantaCruzAddress = response.results.formatted_address
-    bwSantaCruzPlaceID = response.results.place_id
-}
-
-var halfMoonAPI;
-var halfMoonImage;
-var halfMoonLat;
-var halfMoonLong;
-var halfMoonHotel;
-var halfMoonPlaceID;
-
-halfMoonAPI = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=half+moon+bay&key="+apiKey)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    console.log(response.results[0].photos[0].photo_reference)
-    halfMoonLat = response.results.geometry.location.lat
-    halfMoonLong = response.results.location.lng
-    halfMoonPlaceID = response.results.place_id
-    halfMoonImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-})
-
-var bwHalfMoonImage;
-var bwHalfMoonLat;
-var bwHalfMoonLong;
-var bwHalfMoonHotel;
-var bwHalfMoonPlaceID;
-var bwHalfMoonAddress;
-
-halfMoonHotel = fetch("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=best+western+half+moon&type=lodging&key="+apiKey)
-.then(function(data)
-{
-   return data.json()
-}) .then(function(response));
-{
-    bwHalfMoonImage = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey
-    bwHalfMoonLat = response.results.geometry.lat
-    bwHalfMoonLong = response.results.location.lng
-    bwHalfMoonName = response.results.name
-    bwHalfMoonAddress = response.results.formatted_address
-    bwHalfMoonPlaceID = response.results.place_id
+    /*Unselects the chcekboxes */
+    $("#attraction-box input[type='checkbox']").prop('checked',false);
+   
 }
 
 
 
-//{ 
-//    console.log(response)
-//})
-// function getApi() {
-//   var requestUrl = 'https://api.github.com/orgs/nodejs/repos';
-//   fetch(requestUrl)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data)
-//       //Loop over the data to generate a table, each table row will have a link to the repo url
-//       for (var i = 0; i < data.length; i++) {
-//         // Creating elements, tablerow, tabledata, and anchor
-//         var createTableRow = document.createElement('tr');
-//         var tableData = document.createElement('td');
-//         var link = document.createElement('a');
 
-//         // Setting the text of link and the href of the link
-//         link.textContent = data[i].html_url;
-//         link.href = data[i].html_url;
 
-//         // Appending the link to the tabledata and then appending the tabledata to the tablerow
-//         // The tablerow then gets appended to the tablebody
-//         tableData.appendChild(link);
-//         createTableRow.appendChild(tableData);
-//         tableBody.appendChild(createTableRow);
-//       }
-//     });
-// }
 
-// fetchButton.addEventListener('click', getApi);
 
+
+
+/* 
+    Function will hide plan my trip button,attraction list and 
+    display the go back button,directions button  and carousel
+*/
+
+function updateDisplay(event){
+
+// //Hide plan my trip button
+// planTripBtn.addClass('hide');
+
+//Hide the attractions checklist container and plan trip button
+attractionsContainer.addClass('hide');
+
+// document.querySelector('#attractionsContainer input[type="checkbox"]').setAttribute('checked','false')
+//Display the directions Container and button
+
+buttonContainer.removeClass('hide');
+
+carouselContainer.removeClass('hide');
+}
+
+/*click event handler on Plan Trip Event */
+planTripBtn.click(updateDisplay);
+
+
+function displayDirections(){
+    $( "#dialog-confirm" ).dialog('open');
+}
+
+viewDirectionBtn.click(displayDirections);
+
+
+
+
+/***********************DIALOG BOX USING JQUERY UI WIDGETS **********/
+//FROM MODAL JS
+
+$( function() {
+
+    /*This will create dialog box with Close and Print button*/
+    
+        $( "#dialog-confirm" ).dialog({
+          resizable: false,
+          height: "auto",
+          width: "auto",
+          modal: true,
+          buttons: {
+            " Print ": function() {
+              window.print();  
+              $( this ).dialog( "close" ); /*TO DO print functionality */
+            },
+            Cancel: function() {
+              $( this ).dialog( "close" );
+            }
+          }
+        });
+    
+      console.log( $( "#dialog-confirm-back" ).dialog({
+            resizable: false,
+            height: "auto",
+            width: "auto",
+            modal: true,
+            buttons: {
+              " Yes ": function() {
+                resetMap();  //Call the reset Function
+                $( this ).dialog( "close" ); 
+                
+              },
+              " No ": function() {
+                $( this ).dialog( "close" );
+                return;
+              }
+            }
+          }));
+    
+         
+    
+        
+    /*This will hide the  the Dialog Box when Page Loads */
+        $( "#dialog-confirm" ).dialog('close');
+        $( "#dialog-confirm-back").dialog('close');
+   
+});  
+
+
+};

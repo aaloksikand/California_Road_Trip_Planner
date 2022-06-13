@@ -186,12 +186,20 @@ button,.btn {
 /*Carousel Container*/
 
 .carousel-inner img {
-  width: 1000px;
-  height:500px;
+  width: 640px;
+  height:320px;
   margin: 0;
 }
 
+.carousel-control-prev {
+  left: 300px;
+  z-index: 100;
+}
 
+.carousel-control-next {
+  right : 300px;
+  z-index: 100;
+}
 
 /* OVERRIDING JQUERY UI WIDGET STYLING */
 .ui-dialog .ui-dialog-content{

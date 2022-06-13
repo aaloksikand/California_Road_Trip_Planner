@@ -166,7 +166,7 @@ PLAN MY TRIP Click Event Listener
 const directionService=new google.maps.DirectionsService();
 
 const directionsRenderer=new google.maps.DirectionsRenderer();
-directionsRenderer.setMap(map);
+
 
 
 
@@ -182,6 +182,7 @@ let viewDirectionBtn=$('#view-direction-button');
 On click event Plan My Trip Button will execute the calculate Route function  
 */
 planTripBtn.click(()=>{
+    directionsRenderer.setMap(map);
     saveToStorage();
     calculateRoute(directionService,directionsRenderer);
 });

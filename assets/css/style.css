@@ -205,14 +205,23 @@ button,.btn{
 .ui-dialog .ui-dialog-content{
   background-color: var(--body-background-color);
 }
-.ui-dialog-titlebar,.ui-dialog-buttonpane{
+.ui-dialog  .ui-dialog-titlebar,.ui-dialog .ui-dialog-buttonpane{
   background-color: var(--header-background-color);
   color: var(--white);
 }
 
-.ui-dialog-titlebar-close {
+.ui-dialog .ui-dialog-titlebar-close {
   color: var(--white);
+  
 }
+
+.ui-dialog-titlebar-close::after{
+content:'X';
+position: absolute;
+top:-4px;
+left:4px;
+}
+
 .ui-dialog-buttonpane  button {
   padding: 0 0.7rem;
 

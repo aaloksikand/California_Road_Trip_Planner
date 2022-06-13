@@ -173,7 +173,7 @@ function saveToStorage(){
     }
 
 /* 
-Fetches the coordimates from the storage and add it to waypts object with location as key and stopover property as true
+Fetches the coordinates from the storage and add it to waypts object with location as key and stopover property as true
 */
 
 function calculateRoute(directionService,directionsRenderer){
@@ -193,13 +193,14 @@ function calculateRoute(directionService,directionsRenderer){
     }
     
 
-
+    
     let request = {
         origin: sf,
         destination: la,
         waypoints: waypts,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
+        
 
     };
 
@@ -400,7 +401,7 @@ $( function() {
               window.print();  
               $( this ).dialog( "close" ); 
             },
-            Cancel: function() {
+            " Cancel ": function() {
               $( this ).dialog( "close" );
             }
           }

@@ -1,22 +1,16 @@
-/*BOOTSTRAP  JS CODE*/
-
-
-// //
-// var headers = $('#accordion .accordion-header');
-// var contentAreas = $('#accordion .ui-accordion-content ').hide();
-
-
-// headers.click(function() {
-//     var panel = $(this).next();
-//     var isOpen = panel.is(':visible');
-//     panel[isOpen? 'slideUp': 'slideDown']()
-//         .trigger(isOpen? 'hide': 'show');
-//     return false;
-// });
-
-
 /********CAROUSEL ***********/
- $('.carousel').carousel();
+
+$(document).bind('keyup', function(event) {
+
+    if (event.which==39) {
+        $('a.carousel-control.right').click;
+    }   
+  
+    else if(event.which==37){
+        $('a.carousel-control.left').click;
+    }
+  
+  });
 
 
 

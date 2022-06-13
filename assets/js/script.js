@@ -596,6 +596,6 @@ function listHotels(query){
 
 
 
-  
+  //Retrying  PR 
 
   

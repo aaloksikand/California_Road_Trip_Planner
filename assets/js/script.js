@@ -397,3 +397,135 @@ $( function() {
 
 
 };
+
+
+
+/*TO DO*/
+/*
+Checking * sign of the dialog box
+-Adding Title for attractions
+-Adding Printig feature  ---DONE
+-Add Map Type as Road 
+--- We need a back button to come back to the start page  --DONE
+
+ 
+--Saving the Route --Wishlist
+--Try Yelp API--In Progress
+
+*/
+//THE FORK API
+
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': 'ff2f07f96dmsh9dceec907ecfccep179252jsn46ebfd60a30a',
+// 		'X-RapidAPI-Host': 'the-fork-the-spoon.p.rapidapi.com'
+// 	}
+// };
+
+// fetch('https://the-fork-the-spoon.p.rapidapi.com/restaurants/v2/get-info?restaurantId=522995', options)
+// 	.then(response => response.json())
+// 	.then(response => console.log(response))
+// 	.catch(err => console.error(err));
+
+
+/*Finds restaurants within the  5000 meter radius ~ 3 miles 	circle:lon,lat,radiusMeters*/
+/*Can we ge image of the restaurant using place id 510fc589543d9a5ec0592fcd678fbce44240f00103f90158dcdb160000000092030f50696e6563726573742044696e6572 */
+fetch('https://api.geoapify.com/v2/places?categories=catering.restaurant&filter=circle:-122.419418,37.774929,5000&limit=3&apiKey=eca584cd84964e56ad212e283e966dab')
+.then((response)=>{
+    return response.json();
+})
+.then(
+    (data)=>{
+        console.log(data);
+        console.log(data.features[0].properties.address_line1);
+        console.log(data.features[0].properties.address_line2);
+        console.log(data.features[0].properties.details);
+    }
+)
+
+
+
+// let yelpAPI = require('yelp-api');
+
+// // Create a new yelpAPI object with your API key
+// let apiKey = 'jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx';
+// let yelp = new yelpAPI(apiKey);
+
+// // Set any parameters, if applicable (see API documentation for allowed params)
+// let params = [{ location: '20008' }];
+
+// // Call the endpoint
+// yelp.query('businesses/search', params)
+// .then(data => {
+//   // Success
+//   console.log(data);
+// })
+// .catch(err => {
+//   // Failure
+//   console.log(err);
+// });
+
+// var myurl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=by-chloe&location=boston";
+
+// $.ajax({
+//   url: myurl,
+//   headers: {
+//     'Authorization': 'Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx',
+//   },
+//   method: 'GET',
+//   dataType: 'json',
+//   success: function(data) {
+//     console.log('success: ' + data);
+
+//   }
+// });
+
+let searchUrl='https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=5000&longitude=-118.243683&latitude=34.052235'
+
+let options={
+
+    headers:{ "Content-Type": "application/json"  ,
+                "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
+                "Access-Control-Allow-Origin": "*"
+            }
+}
+
+fetch(searchUrl,options).
+then(response=>{
+    console.log(response);
+    return response.json();
+}).
+then(
+    data=>{
+        console.log(data.businesses[0].location);
+        console.log(data.businesses[0].image_url);
+        console.log(data.businesses[0].name);
+        console.log(data.businesses[0].rating);
+    
+    }
+    )
+.catch(e=>{console.log(e)});
+
+// const yelp = require('yelp-api');
+
+// // Place holder for Yelp Fusion's API Key. Grab them
+// // from https://www.yelp.com/developers/v3/manage_app
+// const apiKey = 'jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx';
+
+// const searchRequest = {
+//     latitude:"34.052235",
+//     longitude:"-118.243683",
+//     radius:"5000"
+// };
+
+// const client = yelp.client(apiKey);
+
+// client.search(searchRequest)
+// .then(response => {
+//   const firstResult = response.jsonBody.businesses[0];
+//   const prettyJson = JSON.stringify(firstResult, null, 4);
+//   console.log(prettyJson);
+// }).catch(e => {
+//   console.log(e);
+// });

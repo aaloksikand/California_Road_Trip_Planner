@@ -14,10 +14,8 @@
 //     return false;
 // });
 
-
 /********CAROUSEL ***********/
- $('.carousel').carousel();
-
+$('.carousel').carousel();
 
 
 

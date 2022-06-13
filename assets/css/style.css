@@ -5,11 +5,9 @@
 }
 
 
-/*CSS Variables assign to root*/
+/*CSS Variables*/
 :root {
-  /* --body-background-color: #fbe0c3; */
   --body-background-color:#F8EFEA;
-  /* --header-background-color: #344648; */
   --header-background-color: #3D5F5B;
   --white: #fff;
   --black: #000;
@@ -21,39 +19,23 @@
 
 body {
   min-height: 110vh;
-  /* width: 100%; */
-   overflow-x: hidden;
+  overflow-x: hidden;
   overflow-y: scroll;  
   background-color: var(--body-background-color);
 }
 
+/* STYLING FOR HEADER */
 header {
   background-color: var(--header-background-color);
   color: var(--white);
-  /* top: 0; */
   height: 110px;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 
-/* main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
-/* styling for all the card containers */
+/* STYLING FOR CARD CONTAINERS */
 .card-container {
-
   background-color: var(--card-box);
   box-shadow: 0 0 10px 2px;
- 
-  /* display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  margin: 20px; */
 } 
 
 .attraction-checkbox {
@@ -64,8 +46,6 @@ header {
   box-shadow: 0 5px 5px var(--black);;
   background: var(--white);
   transition: transform 0.15s;
-  /* justify-content: space-evenly;
-  align-items: center; */
 }
 
 .attraction-checkbox:first-of-type {
@@ -174,14 +154,18 @@ div a {
 }
 
 
-button,.btn {
-    /* margin-left: 48%; */
- 
+button,.btn{
   background-color: var(--header-background-color);
+  color:var(--white);
+  
 }
-/*Additions on 06-10*/
-/*Styling for MAP*/
+.btn:hover{
 
+ color: #f5f5dc;
+
+}
+
+/*Styling for MAP*/
 #map{
   height: 600px;
   width: 100%;
@@ -194,11 +178,6 @@ button,.btn {
   height: 380px;
 }
 
-#accordion {
-  width: 66%;
-  margin-left: 17%;
-}
-/*Initially Display is set as none for carousel,Directions button adn directons panel*/
 
 .hide {
     display: none !important;
@@ -208,23 +187,41 @@ button,.btn {
 
 #carousel-container{
 
-  height:300px;
+  height:600px;
   background-color: #000;
 }
 
+.carousel-item {
+
+  height:400px;
+  
+  
+}
+.carousel-item img{
+  opacity: 0.5;
+}
 
 /* OVERRIDING JQUERY UI WIDGET STYLING */
 .ui-dialog .ui-dialog-content{
   background-color: var(--body-background-color);
 }
-.ui-dialog-titlebar,.ui-dialog-buttonpane{
+.ui-dialog  .ui-dialog-titlebar,.ui-dialog .ui-dialog-buttonpane{
   background-color: var(--header-background-color);
   color: var(--white);
 }
 
-.ui-dialog-titlebar-close {
+.ui-dialog .ui-dialog-titlebar-close {
   color: var(--white);
+  
 }
+
+.ui-dialog-titlebar-close::after{
+content:'X';
+position: absolute;
+top:-4px;
+left:4px;
+}
+
 .ui-dialog-buttonpane  button {
   padding: 0 0.7rem;
 

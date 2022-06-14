@@ -208,6 +208,20 @@ button,.btn{
   height:600px;
 }
 
+  background-color {
+  color: var(--black) !important;
+}
+
+.carousel-item {
+
+  height:400px;
+  
+  
+}
+.carousel-item img{
+  opacity: 0.5;
+ 
+}
 
 /* OVERRIDING JQUERY UI WIDGET STYLING */
 .ui-dialog .ui-dialog-content{

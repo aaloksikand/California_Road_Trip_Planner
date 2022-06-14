@@ -93,6 +93,7 @@ Also the entries should be updated in waypoints array
 
 checkBoxList.click(function(event){
 
+
     if($(this).prop('checked')){
 
         let waypntObj={};
@@ -106,6 +107,7 @@ checkBoxList.click(function(event){
         }
 
         waypoints.push(waypntObj);  
+       
 
         //Adding marker for respective waypoints/attractions user selects to the map and array
         //Converted to LatLng as the lat and lng values from HTML checklist value is type string
@@ -154,12 +156,14 @@ planTripBtn.click(()=>{
     saveToStorage();
     calculateRoute(directionService,directionsRenderer);
     updateDisplay();
+    
 });
 
 //Save the list of attractions/waypoints array to local storage
 
 function saveToStorage(){
     localStorage.setItem("waypoints",JSON.stringify(waypoints));  
+
     }
 
 /* 
@@ -168,10 +172,13 @@ Fetches the coordinates from the storage and add it to waypts object with locati
 
 function calculateRoute(directionService,directionsRenderer){
 
-    //waypts is an array of objects with location (object with lat ,lng  as keys) and stopover flag.
+    //tempwayPointsArray is an array of objects with location (object with lat ,lng  as keys) and stopover flag.
 
     let waypointStorage=JSON.parse(localStorage.getItem("waypoints"));
-    const waypts=[]
+
+     let tempwayPointsArray=[]
+
+   
 
     for(let index=2;index<waypointStorage.length;index++)
     {
@@ -179,7 +186,8 @@ function calculateRoute(directionService,directionsRenderer){
         let coordinates=new google.maps.LatLng(waypointStorage[index].location.lat,waypointStorage[index].location.lng);
         
         let waypt={location:coordinates,stopover:true};
-        waypts.push(waypt);
+        localStorage.clear();
+        tempwayPointsArray.push(waypt);
     }
     
 
@@ -187,7 +195,7 @@ function calculateRoute(directionService,directionsRenderer){
     let request = {
         origin: sf,
         destination: la,
-        waypoints: waypts,
+        waypoints: tempwayPointsArray,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
         
@@ -217,7 +225,7 @@ function calculateRoute(directionService,directionsRenderer){
 
             /*If received response is succesful,check nearby restaurants using YELP API */
                 
-                checkNearByRestaurants();  //TO DO
+                // checkNearByRestaurants();  //TO DO
                 
             
 
@@ -252,103 +260,103 @@ function updateDisplay(event){
 
 /********YELP API displaying restaurants near the attraction into a dynamically created carousel ************/
 
-function checkNearByRestaurants(){
+// function checkNearByRestaurants(){
 
-let carouselImage=document.querySelector('.carousel-item img')
-let carouselMainDiv=document.querySelector('.carousel-inner');
+// let carouselImage=document.querySelector('.carousel-item img')
+// let carouselMainDiv=document.querySelector('.carousel-inner');
 
-//Reset the carousel,for every new function call
-carouselMainDiv.innerHTML=""; 
-let attraction_names=document.querySelectorAll('.attraction-checkbox a');
+// //Reset the carousel,for every new function call
+// carouselMainDiv.innerHTML=""; 
+// let attraction_names=document.querySelectorAll('.attraction-checkbox a');
 
-let limit=1;
-let radius=5000 //radius in meter
-let options={
+// let limit=1;
+// let radius=5000 //radius in meter
+// let options={
 
-    headers:{ "Content-Type": "application/json"  ,
-                 "Authorization": "Bearer 2QC4249zvAl_kbSHuEuPsK6DLlSe3SH5Ba4O5z2YCSoGQGAKL6zicl_M-WUYZ3e7QuzkXzJF_W131vfp2NkYDBUPwhiY3Txo0UxuujbWFtW13cu__YXwqb7vodKnYnYx",
-                 "Access-Control-Allow-Origin": "*"
-           }
-}
+//     headers:{ "Content-Type": "application/json"  ,
+//                  "Authorization": "Bearer 2QC4249zvAl_kbSHuEuPsK6DLlSe3SH5Ba4O5z2YCSoGQGAKL6zicl_M-WUYZ3e7QuzkXzJF_W131vfp2NkYDBUPwhiY3Txo0UxuujbWFtW13cu__YXwqb7vodKnYnYx",
+//                  "Access-Control-Allow-Origin": "*"
+//            }
+// }
 
 
-for(let index=0;index<waypoints.length;index++){
+// for(let index=0;index<waypoints.length;index++){
 
-    let carouselItemDiv=document.createElement('div');
-    carouselItemDiv.classList.add('carousel-item');
+//     let carouselItemDiv=document.createElement('div');
+//     carouselItemDiv.classList.add('carousel-item');
     
-    if(index==0){
-        carouselItemDiv.classList.add('active');
-    }
-    else{
-        carouselItemDiv.classList.remove('active');
-    }
+//     if(index==0){
+//         carouselItemDiv.classList.add('active');
+//     }
+//     else{
+//         carouselItemDiv.classList.remove('active');
+//     }
     
 
-    let carouselCaption=document.createElement('div');
-    carouselCaption.classList.add('carousel-caption');
+//     let carouselCaption=document.createElement('div');
+//     carouselCaption.classList.add('carousel-caption');
 
    
 
-    let name=attraction_names[index].innerHTML;
+//     let name=attraction_names[index].innerHTML;
     
-    let lat=Number(waypoints[index].location.lat);
-    let lng=Number(waypoints[index].location.lng);
+//     let lat=Number(waypoints[index].location.lat);
+//     let lng=Number(waypoints[index].location.lng);
     
    
 
-    let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}&limit=${limit}`
+//     let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}&limit=${limit}`
 
-    fetch(searchUrl,options).
-then(response=>{
+//     fetch(searchUrl,options).
+// then(response=>{
     
-     return response.json();
-}).
- then(
-     data=>{
+//      return response.json();
+// }).
+//  then(
+//      data=>{
 
-        //restaurant image
+//         //restaurant image
 
-        let restaurantImage=data.businesses[0].image_url;
-        let imageEl=document.createElement('img');  
-        imageEl.classList.add('d-block');
-        imageEl.classList.add('w-100');
-        imageEl.classList.add('img-thumbnail');
-        imageEl.setAttribute('src',restaurantImage); 
+//         let restaurantImage=data.businesses[0].image_url;
+//         let imageEl=document.createElement('img');  
+//         imageEl.classList.add('d-block');
+//         imageEl.classList.add('w-100');
+//         imageEl.classList.add('img-thumbnail');
+//         imageEl.setAttribute('src',restaurantImage); 
 
-        carouselItemDiv.append(imageEl)
+//         carouselItemDiv.append(imageEl)
 
-        //restaurant name 
+//         //restaurant name 
         
-        let restaurantName=data.businesses[0].name;
-        let restaurantAddress=data.businesses[0].location.display_address.join();
+//         let restaurantName=data.businesses[0].name;
+//         let restaurantAddress=data.businesses[0].location.display_address.join();
 
-        let h5El=document.createElement('h5');
-        h5El.classList.add('text-dark');
-        h5El.classList.add('font-weight-bold');
-        h5El.innerHTML=restaurantName;
-        let pEl=document.createElement('p');
-        pEl.innerHTML=restaurantAddress;
-        pEl.classList.add('text-dark');
-        pEl.classList.add('font-weight-bold');
+//         let h5El=document.createElement('h5');
+//         h5El.classList.add('text-dark');
+//         h5El.classList.add('font-weight-bold');
+//         h5El.innerHTML=restaurantName;
+//         let pEl=document.createElement('p');
+//         pEl.innerHTML=restaurantAddress;
+//         pEl.classList.add('text-dark');
+//         pEl.classList.add('font-weight-bold');
 
-        carouselCaption.append(h5El);
-        carouselCaption.append(pEl);
+//         carouselCaption.append(h5El);
+//         carouselCaption.append(pEl);
 
-        carouselItemDiv.append(carouselCaption);
+//         carouselItemDiv.append(carouselCaption);
 
 
-        carouselMainDiv.append(carouselItemDiv);
+//         carouselMainDiv.append(carouselItemDiv);
        
-    })
-     .catch(e=>{
+//     })
+//      .catch(e=>{
 
-        console.log(e);  //Exception will be displayed in carousel
-    });
+//         console.log(e);  //Exception will be displayed in carousel
+//     });
     
-}
+// }
 
-}
+// }
 
 
 
@@ -366,14 +374,15 @@ When User click the Back Button
 //Opens the Javascript UI Widget -Dialog Confirmation Box
 
 backBtn.click(()=>{
-   
+    waypoints=[{location:la,stopover:true},{location:sf,stopover:true}];
     $( "#dialog-confirm-back" ).dialog('open');
 });
 
 /*Reset the Map,remove the routes and markers exceopt the start and  stop coordinates */
 function resetMap(){
-     
+    localStorage.clear();
     directionsRenderer.setMap(null);
+    
     
     //Remove the markers except the start and stop
     for(let index=2;index<markers.length;index++){
@@ -429,6 +438,7 @@ $( function() {
             modal: true,
             buttons: {
               " Yes ": function() {
+               
                 resetMap();  //Call the reset Function
                 $( this ).dialog( "close" ); 
                 

@@ -21,7 +21,8 @@ As a California visitor, I want to take a scenic multi-day road trip from Los An
 
 *  Github Repo : https://github.com/aaloksikand/California_Road_Trip_Planner/
 
-*  Live Link : https://aaloksikand.github.io/California_Road_Trip_Plannner/
+*  Live Link : https://aaloksikand.github.io/California_Road_Trip_Planner/
+
 
 ### Technologies/Frameworks/Libraries Used
 

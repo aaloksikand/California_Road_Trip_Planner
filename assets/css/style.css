@@ -39,7 +39,6 @@ header {
 } 
 
 .attraction-checkbox {
-
   width: 170px;
   height: 130px;
   border-radius: 10px;
@@ -157,12 +156,18 @@ div a {
 button,.btn{
   background-color: var(--header-background-color);
   color:var(--white);
-  
+  width: 200px;
 }
 .btn:hover{
-
  color: #f5f5dc;
+}
 
+.attBtn {
+  margin-right: 160px;
+}
+
+.attSize {
+  width: 290px;
 }
 
 /*Styling for MAP*/
@@ -175,7 +180,7 @@ button,.btn{
 }
 
 #attraction-box {
-  height: 380px;
+  height: 400px;
 }
 
 
@@ -192,16 +197,22 @@ button,.btn{
   color: var(--black) !important;
 }
 
-.carousel-item {
-
+.carousel-inner img {
   height:500px;
-  
-  
+  min-width: 63vw;
 }
+
 .carousel-item img{
   opacity: 0.5;
   height:500px;
-  
+}
+
+.carousel-inner img a {
+  text-decoration: none;
+}
+
+.carousel-caption {
+  color: var(--black);
 }
 /* h5,p{
 
@@ -234,4 +245,54 @@ left:4px;
 .ui-dialog-buttonpane  button {
   padding: 0 0.7rem;
 
+}
+
+/* media screen for responsive layout on mobile view */
+
+@media screen and (max-width: 992px ) {
+  .attDirection {
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 180px;
+    margin: 20px;
+    margin-right: 110px;
+  }
+  .attBtn {
+    flex-direction: row;
+    min-width: 300px;
+    margin-left: 80px;
+  }
+  #attraction-box {
+    height: 850px;
+  }
+
+}
+@media screen and (min-width: 576px) and (max-width: 772px) {
+  .container {
+    max-width: 600px;
+  }
+  #attraction-box {
+    flex-wrap: wrap;
+    height: 1600px;
+  }
+}
+@media screen and (max-width: 575px) {
+  header {
+    height: 140px;
+  }
+  .map-container {
+    width: 500px;
+  }
+  .container {
+    min-width: 300px;
+  }
+  .attBtn {
+    flex-wrap: wrap;
+    flex-direction: row;
+    min-width: 300px;
+    margin-left: 180px;
+  }
+  #attraction-box {
+    height: 1600px;
+  }
 }

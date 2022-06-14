@@ -24,10 +24,10 @@
               <div id="map"></div>
           </div>  
       </div>
-
+      <!--Container for Attraction Cards-->
       <div class="container card-container d-flex justify-content-center align-items-center flex-wrap py-4 mb-5" id = "attraction-box">
-        <div class ="row align-items-center justify-content-center">
-            <div class="col-2 mx-1">
+        <div class ="row align-items-center justify-content-center attDirection">
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
               <div class="attraction-checkbox">
                 <input type="checkbox" id="checkbox1" value="34.031246,-118.788193"/>
                 <label for="checkbox1">
@@ -43,7 +43,7 @@
               </div>
             </div>
 
-            <div class="col-2 mx-1">
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
               <div class="attraction-checkbox">
                 <input type="checkbox" id="checkbox2" value="34.456936,-119.254440" />
                 <label for="checkbox2">
@@ -59,7 +59,7 @@
               </div>
             </div>
       
-            <div class="col-2 mx-1">
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
             <div class="attraction-checkbox">
               <input type="checkbox" id="checkbox3" value="34.420830,-119.698189" />
               <label for="checkbox3">
@@ -76,7 +76,7 @@
             </div>
             </div>
          
-            <div class="col-2 mx-1">
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
             <div class="attraction-checkbox">
               <input type="checkbox" id="checkbox4" value="34.5897,-120.1372" />
               <label for="checkbox4">
@@ -93,7 +93,7 @@
             </div>
             </div>
      
-            <div class="col-2 mx-1">
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
             <div class="attraction-checkbox">
               <input type="checkbox" id="checkbox5" value="35.370781,-120.851173" />
               <label for="checkbox5">
@@ -110,9 +110,9 @@
             </div>
         </div>
         <!--Row -2-->
-        <div class="row align-items-center justify-content-center"> 
+        <div class="row align-items-center justify-content-center attDirection"> 
 
-          <div class="col-2 mx-1">
+          <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
             <div class="attraction-checkbox">
               <input type="checkbox" id="checkbox6" value="35.640556,-120.680008"/>
               <label for="checkbox6">
@@ -128,7 +128,7 @@
             </div>
           </div>
 
-          <div class="col-2 mx-1">
+          <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox7" value="36.1045,-121.6222" />
             <label for="checkbox7">
@@ -144,7 +144,7 @@
           </div>
           </div>
 
-          <div class="col-2 mx-1">
+          <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox8" value="36.555241,-121.923286"/>
             <label for="checkbox8">
@@ -160,7 +160,7 @@
           </div>
           </div>
         
-          <div class="col-2 mx-1">
+          <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox9" value="36.974117,-122.030792"/>
             <label for="checkbox9">
@@ -176,7 +176,7 @@
           </div>
           </div>
 
-          <div class="col-2 mx-1">
+          <div class="col-lg-2 col-md-6 col-sm-12 col-12 mx-1 attSize">
           <div class="attraction-checkbox">
             <input type="checkbox" id="checkbox10" value="37.463552,-122.428586"/>
             <label for="checkbox10">
@@ -193,18 +193,19 @@
           </div>
   
         </div>
-        <div class="row align-items-center justify-content-center">
-          <div class="col-12">
-            <button id="plan-trip" class="btn ">Plan My Trip</button>
-          </div>
+      <div class="row d-flex align-items-center justify-content-center attBtn">
+        <div class="col-lg-2 col-md-6 col-sm-5 col-12">
+          <button id="plan-trip" class="btn ">Plan My Trip</button>
         </div>
+      </div>
+        
         
       </div>  
    </main>
     
       <!--The below elements will be hidden-->
     <section id="buttonSection" class="hide container m-auto">
-      <div class="row d-flex  align-items-center">
+      <div class="row">
         <div class="col-sm-12 col-md-6 d-flex">
           <!--Added bootstrap attributes for modal component-->
           <button id="back-button" class="btn w-100 text-white">Go Back</button>
@@ -222,6 +223,7 @@
   </div>
 </section> 
 
+
 <!--YEL API Restaurnat Carousel-->
 <!--
 
@@ -229,12 +231,18 @@
 
 -->
 
+<<<<<<< HEAD
  <section class="container bg-black my-5">  
 
   <section class="row text-center">
    <section  id="carousel-section" class="restaurant-carousel col-12 hide">
+=======
+<section class="container bg-black my-5">  
+  <section class="row">
+   <section class="restaurant-carousel hide" id="carousel-section" >
+>>>>>>> origin
 
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"  id="carousel-container">
+    <div id="carouselExampleControls" class="carousel slide" data-interval = "false" data-ride="carousel"  id="carousel-container">
       <div class="carousel-inner">
 
       </div>
@@ -247,12 +255,132 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+<<<<<<< HEAD
    </section>
 
    <section class="row text-center"></section>
 
-  </section>
+=======
     
+    </section>
+>>>>>>> origin
+  </section>
+</section>
+
+ <!--Carousel Hotel Container-->
+ 
+<section class="container bg-black my-5"> 
+  <section class="row">   
+    <section id="carouselExampleControls-1" class="restaurant-carousel hide carousel slide " data-interval = "false" data-ride="carousel"  id="carousel-container">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/images/Santa-Cruz.jpg" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Los Angeles</h2>
+            <h3>Best Western Royal Palace Inn & Suites</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/hotels-in-los-angeles/best-western-royal-palace-inn-suites/propertyCode.05268.html" target="_blank">2528 S. Sepulveda Boulevard Los Angeles, CA 90064</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Big-Sur.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Ojai</h2>
+            <h3>Best Western Plus Carpinteria Inn</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/hotels-in-carpinteria/best-western-plus-carpinteria-inn/propertyCode.05425.html" target="_blank">4558 Carpinteria Avenue Carpinteria, 93013-1863</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Santa Barbara</h2>
+            <h3>Best Western Plus Santa Barbara</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/hotels-in-santa-barbara/best-western-plus-santa-barbara/propertyCode.05206.html" target="_blank">2220 Bath Street Santa Barbara, CA 93105-4322</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Solvang</h2>
+            <h3>SureStay Plus Hotel by Best Western Lompoc</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/lompoc/hotel-rooms/surestay-plus-hotel-by-best-western-lompoc/propertyCode.52049.html" target="_blank">1621 N H Street Lompoc, CA 93436</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Morro Bay</h2>
+            <h3>Best Western San Marcos Inn</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/morro-bay/hotel-rooms/best-western-san-marcos-inn/propertyCode.05232.html" target="_blank">250 Pacific Street Morro Bay, CA 93442</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Paso Robles</h2>
+            <h3>Best Western Plus Black Oak</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/hotels-in-paso-robles/best-western-plus-black-oak/propertyCode.05084.html" target="_blank">1135 24th Street Paso Robles, CA 93446</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Big Sur</h2>
+            <h3>Best Western Carmel's Town House Lodge</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/carmel-by-the-sea/hotel-rooms/best-western-carmel-s-town-house-lodge/propertyCode.05022.html" target="_blank">5th & San Carlos StreetCarmel-by-the-Sea, CA 94539</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Carmel-by-the-Sea</h2>
+            <h3>Best Western Carmel's Town House Lodge</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/carmel-by-the-sea/hotel-rooms/best-western-carmel-s-town-house-lodge/propertyCode.05022.html" target="_blank">5th & San Carlos StreetCarmel-by-the-Sea, CA 94539</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Santa Cruz</h2>
+            <h3>Best Western Plus All Suites Inn</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/hotels-in-santa-cruz/best-western-plus-all-suites-inn/propertyCode.05480.html" target="_blank">500 Ocean Street
+              Santa Cruz, CA 95060</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Half Moon Bay</h2>
+            <h3>Best Western Coyote Point Inn</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/san-mateo/hotel-rooms/best-western-coyote-point-inn/propertyCode.05669.html" target="_blank">480 N Bayshore Boulevard
+              San Mateo, CA 94401</a>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/Morro-Bay.jpg" class="img-responsive rounded mx-auto d-block img-thumbnail" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h2>San Francisco</h2>
+            <h3>Hotel Bijou, WorldHotels Crafted</h3>
+            <a href = "https://www.bestwestern.com/en_US/book/hotels-in-san-francisco/hotel-bijou-worldhotels-crafted/propertyCode.05766.html" target="_blank">111 Mason Street San Francisco, CA 94102</a>
+          </div>
+        </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls-1" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls-1" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      </div>
+    </section>
+  </section>  
+</section>
+
+
+
+    
+
+
 
     <!-- JQUERY UI WIDGET DIALOG CONFIRMATION COMPONENT  -->
 
@@ -261,39 +389,25 @@
     </div>
 
 
-</section>
+  </section>
+  <!--JQUERY & JQUERY WIDGET SCRIPT-->
 
-
-    <!--JQUERY & JQUERY WIDGET SCRIPT-->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
    <!--BOOTSTRAP SCRIPT-->
-   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
- 
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    -->
-
-    <!-- <scrip src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
-    
-      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE&libraries=places"></script> -->
     <!--
-        JAVASCRIPT MAP API 
+        JAVASCRIPT MAP API
      * The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
      and consistent behavior across browsers, consider loading using Promises
      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
-
     * callback executes the initMap function
-
     * async allows the API loading to happen parellely while the remaining page is rendering
     -->
 

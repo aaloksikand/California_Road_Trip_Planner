@@ -199,22 +199,26 @@ button,.btn{
 
 
 
-.carousel-item img{
-  opacity: 0.4;
+.restaurant-carousel   .carousel-item img{
+  opacity: 0.6;
   width:80%;
   height:400px;
   border: 1px solid var(--button-color);
   border-radius: 10px;
 }
 
+.hotel-carousel   .carousel-item img{
+  height:500px;
+  width:100%;
+}
 
 .carousel-inner img a {
   text-decoration: none;
 }
 
-.carousel-caption {
+.carousel-caption-yelp {
   position: absolute;
-  top:13px;
+  top:8px;
 
 }
 

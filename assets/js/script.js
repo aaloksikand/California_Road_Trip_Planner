@@ -252,11 +252,8 @@ function updateDisplay(event){
     
     buttonContainer.removeClass('hide');
     // carouselContainer.removeClass('hide');
-$('.restaurant-carousel').removeClass('hide')
+    $('.restaurant-carousel').removeClass('hide')
 
-    //TEST
-
-    $('.hotel-carousel').removeClass('hide');
 
 
 

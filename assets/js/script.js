@@ -1,5 +1,6 @@
 //GOOGLE's MAPS JAVASCRIPT API used to customize map with your content
 //DIRECTION Services of Maps Javascript API is used to calculate the directions and return an efficient path. 
+//YELP API used to display the  restaurants in radius of 5000 m around the selected attractions.
 
 /*
 Function will invoked once the API is loaded 
@@ -18,7 +19,6 @@ let attractionsContainer=$('#attraction-box');
 
 let buttonContainer=$("#buttonSection");
 let carouselContainer=$('#carousel-section');
-let carouselContainerYelp=$('#carousel-section-yelp');
 let backBtn=$('#back-button');
 let viewDirectionBtn=$('#view-direction-button');
 let dirPanel = document.getElementById('directions-panel');
@@ -217,7 +217,6 @@ function calculateRoute(directionService,directionsRenderer){
 
             /*If received response is succesful,check nearby restaurants using YELP API */
                 
-            //  checkNearByHotels();
                 checkNearByRestaurants();  //TO DO
                 
             
@@ -245,12 +244,13 @@ function updateDisplay(event){
     //Display the directions Container and button
     buttonContainer.removeClass('hide');
    
-    $('.restaurant-carousel').removeClass('hide')
+    $('.restaurant-carousel').removeClass('hide');
+    $('.hotel-carousel').removeClass('hide')
 
     }
     
 
-/********YELP API ************/
+/********YELP API displaying restaurants near the attraction into a dynamically created carousel ************/
 
 function checkNearByRestaurants(){
 
@@ -301,7 +301,7 @@ for(let index=0;index<waypoints.length;index++){
 
     fetch(searchUrl,options).
 then(response=>{
-    console.log(response);
+    
      return response.json();
 }).
  then(
@@ -313,10 +313,12 @@ then(response=>{
         let imageEl=document.createElement('img');  
         imageEl.classList.add('d-block');
         imageEl.classList.add('w-100');
+        imageEl.classList.add('img-thumbnail');
         imageEl.setAttribute('src',restaurantImage); 
 
         carouselItemDiv.append(imageEl)
 
+        //restaurant name 
         
         let restaurantName=data.businesses[0].name;
         let restaurantAddress=data.businesses[0].location.display_address.join();
@@ -339,7 +341,10 @@ then(response=>{
         carouselMainDiv.append(carouselItemDiv);
        
     })
-     .catch(e=>{console.log(e)});
+     .catch(e=>{
+
+        console.log(e);  //Exception will be displayed in carousel
+    });
     
 }
 
@@ -381,6 +386,8 @@ function resetMap(){
     /*Hide Carousel and Button container */
     buttonContainer.addClass('hide');
     carouselContainer.addClass('hide');
+    $('.hotel-carousel').addClass('hide')
+
 
     /*Unselects the chcekboxes */
     $("#attraction-box input[type='checkbox']").prop('checked',false);
@@ -464,81 +471,6 @@ $('.carousel').carousel();
   });
 
 
-/*******************JAVASCRIPT PLACES API***************************/
-
-
-// function checkNearByHotels(){
-
-// let apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE"; //Google Places API Key
-// let destinationList = ["santa+monica","malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay", "san+francisco+golden+gate+bridge"]  //List of destinations along PCH
-// let  destinationHotelList= ["best+western+royal+palace","best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay", "hotel+bijou+san+francisco"]  //List of nearest Best Western to destination
-
-
-/*Destination WishList */
-// destinationList.forEach(function(destination){  //forEach function that will loop through destinations list
-//     listDestinations(destination)
-// })
-
-// destinationHotelList.forEach(function(hotel){  //forEach function that will look through destination Hotels
-    
-//     listHotels(hotel);
-     
-// })
-
-/* Destination Wish List */
-// function listDestinations(query){  //fetching destination data from the Google Places API
-// fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`)
-// .then(function(data)
-// {
-//     return data.json()
-// }) .then(function(response)
-// {
-//     var lat = response.results.geometry.location.lat  //destination latitude
-//     var long = response.results.location.lng  //destination longitude
-//     var placeID = response.results.place_id  //destination Place ID
-//     var image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //destination image
-
-// })
-// }
-
-/*`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey} */
-// let index=-1;
-// function listHotels(query){  //fetching hotel data from the Google Places API
-    
-//     fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey}&limit=1`)
-//      .then(function(response)
-//      {
-//         index++;
-//          return response.json();
-//     }) 
-//     .then(function(data)
-//     {
-//         return data.json()
-//     }) .then(function(response)
-//     {
-
-//         var Lat = response.results.geometry.location.lat  //hotel latitude
-//         var Long = response.results.location.lng  //hotel longitude
-//         var PlaceID = response.results.place_id //hotel places id
-//         var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //hotel photo
-//         var Name = response.results.name  //hotel name
-//         var Address = response.results.formatted_address  //hotel address
-        
-//     { 
-    
-//      console.log(index);
-//          let hotelName = data.results[index].name  ;
-//          let hoteladdress = data.results[index].formatted_address;
-//         console.log("Name "+hotelName);
-//         console.log("Add "+hoteladdress);
-
-       
-//     })
-   
-//     .catch(e=>console.log(e))
-    
-    
-// }}
 
 
 

@@ -4,10 +4,21 @@
 
 ### User Story
 
+As a California visitor, I want to take a scenic multi-day road trip from Los Angeles to San Francisco along California’s scenic Pacific Coast Highway.  I want to be given information about the top destinations along the route and be presented with the recommended dining options and the nearest Best Western accommodation at each destination.
+
 ### Acceptance Criteria
+
+* GIVEN I am accessing a California road trip planner from Los Angeles to San Francisco
+* WHEN I access the application
+* THEN I am given a map of California followed by a list of attractions between Los Angeles and San Francisco
+* WHEN I select the desired attractions and click on "Plan My Trip"
+* THEN I am presented with four items: (1) a new map of California that highlights the suggested route; (2) A carousel displaying each stop and recommended hotel; (3) A button giving me an option to "Get Directions," and (4) A button giving me an option to save the map and suggested route to Local Storage.
 
 ### Links
 
+[This is a link to the repository](https://github.com/aaloksikand/California_Road_Trip_Planner/)
+
+[This is a link to the website]()
 
 ### Technologies/Frameworks/Libraries Used
 
@@ -27,6 +38,7 @@
 * YELP API
 
 ### Screenshot
+![](./assets/images/Screenshot_of_project.png)
 
 ### References
 

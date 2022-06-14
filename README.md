@@ -51,11 +51,15 @@ Below Page is  when user have selected the checkboxes
 
 Below Page is  Route is created based on attractions selected
 
+![]('./assets/images')
 
 Below Dialog Box for Go Back Button
 
+!['Dialog Box with Confirm and Cancel Button to Go Back to Start Page'](./assets/images/Screenshot_dialog_Back_Confirm.jpg)
 
 Below is Dialog Box for Directions Button
+
+!['Dialog Box with Directions Button with print and cancel buttons'](./assets/images/Screenshot_Directions_DialogBox.jpg)
 
 
 ### References

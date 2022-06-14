@@ -343,7 +343,7 @@ then(response=>{
     })
      .catch(e=>{
 
-        carouselCaption.innerHTML=e;  //Exception will be displayed in carousel
+        console.log(e);  //Exception will be displayed in carousel
     });
     
 }

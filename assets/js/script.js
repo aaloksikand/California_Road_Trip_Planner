@@ -245,22 +245,10 @@ function updateDisplay(event){
     
     //Display the directions Container and button
     buttonContainer.removeClass('hide');
-<<<<<<< HEAD
    
     $('.restaurant-carousel').removeClass('hide')
-
-   
-
-
 
     }
-=======
-    // carouselContainer.removeClass('hide');
-    // carouselContainer.removeClass('hide');
-    $('.restaurant-carousel').removeClass('hide')
-
-}
->>>>>>> origin
     
 
 /********YELP API ************/
@@ -270,12 +258,9 @@ function checkNearByRestaurants(){
 let carouselImage=document.querySelector('.carousel-item img')
 let carouselMainDiv=document.querySelector('.carousel-inner');
 
-<<<<<<< HEAD
 //Reset the carousel,for every new function call
 carouselMainDiv.innerHTML=""; 
 let attraction_names=document.querySelectorAll('.attraction-checkbox a');
-=======
->>>>>>> origin
 
 let limit=1;
 let radius=5000 //radius in meter
@@ -287,10 +272,6 @@ let options={
            }
 }
 
-<<<<<<< HEAD
-=======
-let carouselMainDiv=document.querySelector('.carousel-inner');
->>>>>>> origin
 
 for(let index=0;index<waypoints.length;index++){
 

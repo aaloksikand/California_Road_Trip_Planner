@@ -150,7 +150,6 @@ When User clicks on the Plan My Trip Button
 
 
 planTripBtn.click(()=>{
-
     directionsRenderer.setMap(map);
     saveToStorage();
     calculateRoute(directionService,directionsRenderer);
@@ -296,8 +295,7 @@ for(let index=0;index<waypoints.length;index++){
     let lat=Number(waypoints[index].location.lat);
     let lng=Number(waypoints[index].location.lng);
     
-    // console.log(attraction_names[index].innerHTML);
-    console.log(lat, lng);
+   
 
     let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}&limit=${limit}`
 
@@ -346,6 +344,8 @@ then(response=>{
 }
 
 }
+
+
 
 
 /* GO BACK BUTTON CLICK HANDLER*/

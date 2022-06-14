@@ -93,6 +93,7 @@ Also the entries should be updated in waypoints array
 
 checkBoxList.click(function(event){
 
+
     if($(this).prop('checked')){
 
         let waypntObj={};
@@ -106,6 +107,7 @@ checkBoxList.click(function(event){
         }
 
         waypoints.push(waypntObj);  
+       
 
         //Adding marker for respective waypoints/attractions user selects to the map and array
         //Converted to LatLng as the lat and lng values from HTML checklist value is type string
@@ -154,12 +156,14 @@ planTripBtn.click(()=>{
     saveToStorage();
     calculateRoute(directionService,directionsRenderer);
     updateDisplay();
+    
 });
 
 //Save the list of attractions/waypoints array to local storage
 
 function saveToStorage(){
     localStorage.setItem("waypoints",JSON.stringify(waypoints));  
+
     }
 
 /* 
@@ -168,10 +172,13 @@ Fetches the coordinates from the storage and add it to waypts object with locati
 
 function calculateRoute(directionService,directionsRenderer){
 
-    //waypts is an array of objects with location (object with lat ,lng  as keys) and stopover flag.
+    //tempwayPointsArray is an array of objects with location (object with lat ,lng  as keys) and stopover flag.
 
     let waypointStorage=JSON.parse(localStorage.getItem("waypoints"));
-    const waypts=[]
+
+     let tempwayPointsArray=[]
+
+   
 
     for(let index=2;index<waypointStorage.length;index++)
     {
@@ -179,7 +186,8 @@ function calculateRoute(directionService,directionsRenderer){
         let coordinates=new google.maps.LatLng(waypointStorage[index].location.lat,waypointStorage[index].location.lng);
         
         let waypt={location:coordinates,stopover:true};
-        waypts.push(waypt);
+        localStorage.clear();
+        tempwayPointsArray.push(waypt);
     }
     
 
@@ -187,7 +195,7 @@ function calculateRoute(directionService,directionsRenderer){
     let request = {
         origin: sf,
         destination: la,
-        waypoints: waypts,
+        waypoints: tempwayPointsArray,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
         
@@ -217,7 +225,7 @@ function calculateRoute(directionService,directionsRenderer){
 
             /*If received response is succesful,check nearby restaurants using YELP API */
                 
-                checkNearByRestaurants();  //TO DO
+                 checkNearByRestaurants();  //TO DO
                 
             
 
@@ -343,7 +351,7 @@ then(response=>{
     })
      .catch(e=>{
 
-        console.log(e);  //Exception will be displayed in carousel
+        console.log(e);  //Exception will be displayed in console
     });
     
 }
@@ -366,14 +374,15 @@ When User click the Back Button
 //Opens the Javascript UI Widget -Dialog Confirmation Box
 
 backBtn.click(()=>{
-   
+    waypoints=[{location:la,stopover:true},{location:sf,stopover:true}];
     $( "#dialog-confirm-back" ).dialog('open');
 });
 
 /*Reset the Map,remove the routes and markers exceopt the start and  stop coordinates */
 function resetMap(){
-     
+    localStorage.clear();
     directionsRenderer.setMap(null);
+    
     
     //Remove the markers except the start and stop
     for(let index=2;index<markers.length;index++){
@@ -429,6 +438,7 @@ $( function() {
             modal: true,
             buttons: {
               " Yes ": function() {
+               
                 resetMap();  //Call the reset Function
                 $( this ).dialog( "close" ); 
                 

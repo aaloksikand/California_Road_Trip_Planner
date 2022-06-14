@@ -251,7 +251,14 @@ function updateDisplay(event){
     //Display the directions Container and button
     
     buttonContainer.removeClass('hide');
-    carouselContainer.removeClass('hide');
+    // carouselContainer.removeClass('hide');
+$('.restaurant-carousel').removeClass('hide')
+
+    //TEST
+
+    $('.hotel-carousel').removeClass('hide');
+
+
 
     }
     
@@ -276,12 +283,29 @@ let options={
            }
 }
 
+
+let carouselMainDiv=document.querySelector('.carousel-inner');
+
 for(let index=0;index<waypoints.length;index++){
 
-    console.log(waypoints);
+    let carouselItemDiv=document.createElement('div');
+    carouselItemDiv.classList.add('carousel-item');
+    
+    if(index==0){
+        carouselItemDiv.classList.add('active');
+    }
+    else{
+        carouselItemDiv.classList.remove('active');
+    }
+    
+
+    let carouselCaption=document.createElement('div');
+    carouselCaption.classList.add('carousel-caption');
+
+   
+
     let name=attraction_names[index].innerHTML;
-    // let lat=new google.maps.LatLng(waypoints[index].lat);
-    // let lng=waypoints[index].lng;
+    
     let lat=Number(waypoints[index].location.lat);
     let lng=Number(waypoints[index].location.lng);
     
@@ -297,93 +321,42 @@ then(response=>{
 }).
  then(
      data=>{
-        // carouselImage.innerHTML(data.businesses[0].image_url);
-
-
-
-        // let attractionName=(document.querySelector('.attraction-checkbox a')[index]).innerHTML;
-        let restaurantName=data.businesses[0].name;
-        let restaurantAddress=data.businesses[0].location.display_address.join();
-       
-        let slideElement=document.querySelector('#carousel-slide-body');
-        let restaurantElement=document.querySelector('.restaurant-info');
-
-        // let attractionNameEl=$('<h2> <strong>');
-        // attractionNameEl.html(attractionName);
-
-        let restaurantNameEl=document.createElement('h4');
-        restaurantNameEl.innerHTML(restaurantName);
-
-        let addressEl=document.createElement('p');
-        addressEl.innerHTML(restaurantAddress);
 
         //restaurant image
-        let restauranTImage=data.businesses[0].image_url;
-        document.querySelector('#restaurant-img').attr('src',restauranTImage);
 
-        restaurantElement.append(restaurantNameEl);
-        restaurantElement.append(restaurantAddress);
-        // restaurantElement.append(restaurantNameEl);
+        let restaurantImage=data.businesses[0].image_url;
+        let imageEl=document.createElement('img');  
+        imageEl.classList.add('d-block');
+        imageEl.classList.add('w-100');
+        imageEl.setAttribute('src',restaurantImage); 
 
-        // slideElement.append(attractionNameEl);
-        slideElement.append(restaurantElement);
-
+        carouselItemDiv.append(imageEl)
 
         
-        /*
-           <h2 class="attraction-name"><strong>Attraction Name</strong></h2>
-          <div class="restaurant-info">
-          <h4 class="restaurant-name"><strong>Restaurant Name</strong></h4>
-          <p class="restaurant-address">Restaurant Address</p>
-          <a class="restaurant-website">Restaurant Website </a>
+        let restaurantName=data.businesses[0].name;
+        let restaurantAddress=data.businesses[0].location.display_address.join();
 
-         */
-        
-        
+        let h5El=document.createElement('h5');
+        h5El.classList.add('text-dark');
+        h5El.classList.add('font-weight-bold');
+        h5El.innerHTML=restaurantName;
+        let pEl=document.createElement('p');
+        pEl.innerHTML=restaurantAddress;
+        pEl.classList.add('text-dark');
+        pEl.classList.add('font-weight-bold');
 
-        console.log(data);
+        carouselCaption.append(h5El);
+        carouselCaption.append(pEl);
 
+        carouselItemDiv.append(carouselCaption);
+
+
+        carouselMainDiv.append(carouselItemDiv);
        
-//         console.log(data.businesses[0].location);
-//         console.log(data.businesses[0].image_url);
-//         console.log(data.businesses[0].name);
-//         console.log(data.businesses[0].rating);
     })
      .catch(e=>{console.log(e)});
     
 }
-
-// let searchUrl='https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=5000&longitude=-118.243683&latitude=34.052235&limit=3'
-
-// let options={
-
-//     headers:{ "Content-Type": "application/json"  ,
-//                 "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
-//                 "Access-Control-Allow-Origin": "*"
-//             }
-// }
-
-
-// fetch(searchUrl,options).
-// then(response=>{
-//     console.log(response);
-//     return response.json();
-// }).
-// then(
-//     data=>{
-        
-  
-//         console.log(data);
-//         // let url=data.businesses[0].image_url;
-//         // console.log( carouselItem[0]);
-//         // carouselItem[0].setAttributes('src',url);
-//         console.log(data.businesses[0].location);
-//         console.log(data.businesses[0].image_url);
-//         console.log(data.businesses[0].name);
-//         console.log(data.businesses[0].rating);
-    
-//     })
-// .catch(e=>{console.log(e)});
 
 }
 

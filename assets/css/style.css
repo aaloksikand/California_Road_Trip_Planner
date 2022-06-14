@@ -189,6 +189,7 @@ button,.btn{
 
   height:600px;
   background-color: #000;
+  color: var(--black) !important;
 }
 
 .carousel-item {
@@ -199,6 +200,7 @@ button,.btn{
 }
 .carousel-item img{
   opacity: 0.5;
+ 
 }
 
 /* OVERRIDING JQUERY UI WIDGET STYLING */

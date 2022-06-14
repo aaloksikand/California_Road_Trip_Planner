@@ -18,11 +18,13 @@
 }
 
 body {
-  min-height: 110vh;
-   overflow-x: hidden;
-  overflow-y: scroll;   *
+   min-height: 110vh;
+   
+   overflow-x: scroll;
+  overflow-y: scroll;     
   background-color: var(--body-background-color);
 }
+
 
 /* STYLING FOR HEADER */
 header {
@@ -250,6 +252,39 @@ left:4px;
 }
 
 /* media screen for responsive layout on mobile view */
+
+@media screen and (max-width: 575px) {
+  main{
+  
+    margin: 0 auto;
+   
+  }
+
+  .attDirection {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+}
+
+@media screen and (max-width: 992px ) {
+  
+  .attDirection {
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 180px;
+    margin: 20px;
+    margin-right: 110px;
+  }
+  .attBtn {
+    flex-direction: row;
+    min-width: 300px;
+    margin-left: 80px;
+  }
+  #attraction-box {
+    height: 850px;
+  }
+}
 
 @media screen and (max-width: 575px) {
   header {

@@ -187,21 +187,28 @@ button,.btn{
 
 #carousel-container{
 
-  height:600px;
+  height:500px;
   background-color: #000;
   color: var(--black) !important;
 }
 
 .carousel-item {
 
-  height:400px;
+  height:500px;
   
   
 }
 .carousel-item img{
   opacity: 0.5;
- 
+  height:500px;
+  
 }
+/* h5,p{
+
+  font-weight: 500;
+  z-index: 10;
+  font-size: 18px;
+} */
 
 /* OVERRIDING JQUERY UI WIDGET STYLING */
 .ui-dialog .ui-dialog-content{

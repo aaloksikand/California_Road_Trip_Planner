@@ -251,24 +251,26 @@ function updateDisplay(event){
     //Display the directions Container and button
     
     buttonContainer.removeClass('hide');
-    // carouselContainer.removeClass('hide');
+   
     $('.restaurant-carousel').removeClass('hide')
 
+   
 
 
 
     }
     
 
-/********YELP API -TO DO*******/
+/********YELP API ************/
 
 function checkNearByRestaurants(){
 
 let carouselImage=document.querySelector('.carousel-item img')
-let attraction_names=document.querySelectorAll('.attraction-checkbox a');
+let carouselMainDiv=document.querySelector('.carousel-inner');
 
-//let simmyKey=ZDwLaK6UsBvGioKA2k9N9xR1ILix8RlCad-KoQRVZCwaEo5l4lmRmNQLlJ-94mFHBgmJV72ZvENWU2et0boIN1qY8o5ayBqAmc6QchnV9yCPZeSjw5UusbUSXdSnYnYx
-// let chrisKey="2QC4249zvAl_kbSHuEuPsK6DLlSe3SH5Ba4O5z2YCSoGQGAKL6zicl_M-WUYZ3e7QuzkXzJF_W131vfp2NkYDBUPwhiY3Txo0UxuujbWFtW13cu__YXwqb7vodKnYnYx"
+//Reset the carousel,for every new function call
+carouselMainDiv.innerHTML=""; 
+let attraction_names=document.querySelectorAll('.attraction-checkbox a');
 
 let limit=1;
 let radius=5000 //radius in meter
@@ -280,8 +282,6 @@ let options={
            }
 }
 
-
-let carouselMainDiv=document.querySelector('.carousel-inner');
 
 for(let index=0;index<waypoints.length;index++){
 

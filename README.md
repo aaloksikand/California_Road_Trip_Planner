@@ -3,7 +3,7 @@
 ## Project Description
 
  California Road Trip Planner is a web Application created using HTML5,CSS3 and implemented its functionality
- using JS and JQ Libraries and styled using Bootstrap and JQUery UI Widgets.Application provides a route map with start and destination marker and checklist of attractions for user to select.Once the user choose attraction using Google Direction Service,application creates a route and generate directions.Also provide user with the nearest dining options and display the restaurant name,address and image
+ using JS and JQ Libraries and styled using Bootstrap and JQUery UI Widgets.Application provides a route map with start and destination marker and checklist of attractions for user to select.Once the user choose attraction using Google Direction Service,application creates a route and generate directions.Also provide user with the nearest dining options and display the restaurant name,address and image and a placeholder carousel for nearest Best Western Hotels.
 
 ### User Story
 

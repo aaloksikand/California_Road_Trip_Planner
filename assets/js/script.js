@@ -571,11 +571,15 @@ Checking * sign of the dialog box
 
 /*******************JAVASCRIPT PLACES API***************************/
 
+
 function checkNearByHotels(){
 
 let apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE"; //Google Places API Key
-let destinationList = ["malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay"]  //List of destinations along PCH
-let  destinationHotelList= ["best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay"]  //List of nearest Best Western to destination
+let destinationList = ["santa+monica","malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay", "san+francisco+golden+gate+bridge"]  //List of destinations along PCH
+let  destinationHotelList= ["best+western+royal+palace","best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay", "hotel+bijou+san+francisco"]  //List of nearest Best Western to destination
+
+
+
 
 /*Destination WishList */
 // destinationList.forEach(function(destination){  //forEach function that will loop through destinations list

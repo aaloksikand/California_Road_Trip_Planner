@@ -1,38 +1,230 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/*CSS Variables*/
+:root {
+  --body-background-color:#F8EFEA;
+  --header-background-color: #3D5F5B;
+  --white: #fff;
+  --black: #000;
+  --card-box: #BACEC1;
+  --blue: rgb(2, 0, 138);
+  --button-color:#1D3124;
+  
 }
 
 body {
-    min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    background-color: #f1bb8f;
+  min-height: 110vh;
+  overflow-x: hidden;
+  overflow-y: scroll;  
+  background-color: var(--body-background-color);
 }
 
+/* STYLING FOR HEADER */
 header {
-    color :#2660A4;
-    background-color: rgb(236, 139, 69);
-    padding-left: 20px;
-    top: 0;
-    height: 100px;
-    display: flex;
-    align-items: center;
+  background-color: var(--header-background-color);
+  color: var(--white);
+  height: 110px;
 }
 
-main {
+
+/* STYLING FOR CARD CONTAINERS */
+.card-container {
+  background-color: var(--card-box);
+  box-shadow: 0 0 10px 2px;
+} 
+
+.attraction-checkbox {
+
+  width: 170px;
+  height: 130px;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px var(--black);;
+  background: var(--white);
+  transition: transform 0.15s;
+}
+
+.attraction-checkbox:first-of-type {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.attraction-checkbox:active {
+  transform: scale(0.9);
+}
+
+input {
+  display: none;
+}
+
+input:checked + label {
+  opacity: 1;
+  box-shadow: 0 0 0 3px var(--white);
+
+}
+
+input:checked + label img {
+  -webkit-filter: none;
+  filter: none;
+}
+
+input:checked + label .checkbox-cover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+input:checked + label .checkbox-cover svg {
+  stroke-dashoffset: 0;
+}
+
+label {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  opacity: 0.6;
+}
+
+label img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  clip-path: polygon(0% 0%, 100% 0, 100% 81%, 50% 100%, 0 81%);
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+label .checkbox-cover {
+  position: absolute;
+  right: 5px;
+  top: 3px;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--text-color);
+  border: 2px solid var(--blue);
+  transition: transform 0.15s, opacity calc(0.15s * 1.2) linear;
+  opacity: 0;
+  transform: scale(0);
+}
+
+label .checkbox-cover svg {
+  width: 13px;
+  height: 11px;
+  display: inline-block;
+  vertical-align: top;
+  fill: none;
+  margin: 5px 0 0 3px;
+  stroke: var(--blue);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  transition: stroke-dashoffset 0.4s ease 0.15s;
+  stroke-dashoffset: 16px;
+}
+
+label .attraction {
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+label .attraction-detail {
+    text-align: center;
+    font-weight: 600;
+    font-size: 8px;
+}
+
+div a {
     display: flex;
-    width: 100%;
-    height: 60vh;
     justify-content: center;
-    align-items: center;
+    color: var(--black);
+    font-weight: 600;
+    font-size: 15px;
 }
 
-.container {
-    width: 900px;
-    height: 450px;
-    max-width: 80%;
-    background-color: white;
-    box-shadow: 0 0 10px 2px;
+
+button,.btn{
+  background-color: var(--header-background-color);
+  color:var(--white);
+  
+}
+.btn:hover{
+
+ color: #f5f5dc;
+
+}
+
+/*Styling for MAP*/
+#map{
+  height: 600px;
+  width: 100%;
+  padding:-3rem;
+  margin:-3rem;
+  margin:auto;
+}
+
+#attraction-box {
+  height: 380px;
+}
+
+
+.hide {
+    display: none !important;
+}
+
+/*Carousel Container*/
+
+#carousel-container{
+
+  height:600px;
+  background-color: #000;
+  color: var(--black) !important;
+}
+
+.carousel-item {
+
+  height:400px;
+  
+  
+}
+.carousel-item img{
+  opacity: 0.5;
+ 
+}
+
+/* OVERRIDING JQUERY UI WIDGET STYLING */
+.ui-dialog .ui-dialog-content{
+  background-color: var(--body-background-color);
+}
+.ui-dialog  .ui-dialog-titlebar,.ui-dialog .ui-dialog-buttonpane{
+  background-color: var(--header-background-color);
+  color: var(--white);
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  color: var(--white);
+  
+}
+
+.ui-dialog-titlebar-close::after{
+content:'X';
+position: absolute;
+top:-4px;
+left:4px;
+}
+
+.ui-dialog-buttonpane  button {
+  padding: 0 0.7rem;
+
 }

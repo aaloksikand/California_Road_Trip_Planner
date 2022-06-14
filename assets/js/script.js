@@ -150,7 +150,6 @@ When User clicks on the Plan My Trip Button
 
 
 planTripBtn.click(()=>{
-
     directionsRenderer.setMap(map);
     saveToStorage();
     calculateRoute(directionService,directionsRenderer);
@@ -245,20 +244,22 @@ function updateDisplay(event){
     
     //Display the directions Container and button
     buttonContainer.removeClass('hide');
-    // carouselContainer.removeClass('hide');
-    // carouselContainer.removeClass('hide');
+   
     $('.restaurant-carousel').removeClass('hide')
 
-}
+    }
     
 
-/********YELP API -TO DO*******/
+/********YELP API ************/
 
 function checkNearByRestaurants(){
 
 let carouselImage=document.querySelector('.carousel-item img')
-let attraction_names=document.querySelectorAll('.attraction-checkbox a');
+let carouselMainDiv=document.querySelector('.carousel-inner');
 
+//Reset the carousel,for every new function call
+carouselMainDiv.innerHTML=""; 
+let attraction_names=document.querySelectorAll('.attraction-checkbox a');
 
 let limit=1;
 let radius=5000 //radius in meter
@@ -270,7 +271,6 @@ let options={
            }
 }
 
-let carouselMainDiv=document.querySelector('.carousel-inner');
 
 for(let index=0;index<waypoints.length;index++){
 
@@ -295,8 +295,7 @@ for(let index=0;index<waypoints.length;index++){
     let lat=Number(waypoints[index].location.lat);
     let lng=Number(waypoints[index].location.lng);
     
-    // console.log(attraction_names[index].innerHTML);
-    console.log(lat, lng);
+   
 
     let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}&limit=${limit}`
 
@@ -345,6 +344,8 @@ then(response=>{
 }
 
 }
+
+
 
 
 /* GO BACK BUTTON CLICK HANDLER*/

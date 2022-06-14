@@ -2,6 +2,9 @@
 
 ## Project Description
 
+ California Road Trip Planner is a web Application created using HTML5,CSS3 and implemented its functionality
+ using JS and JQ Libraries and styled using Bootstrap and JQUery UI Widgets.Application provides a route map with start and destination marker and checklist of attractions for user to select.Once the user choose attraction using Google Direction Service,application creates a route and generate directions.Also provide user with the nearest dining options and display the restaurant name,address and image
+
 ### User Story
 
 As a California visitor, I want to take a scenic multi-day road trip from Los Angeles to San Francisco along California’s scenic Pacific Coast Highway.  I want to be given information about the top destinations along the route and be presented with the recommended dining options and the nearest Best Western accommodation at each destination.
@@ -16,9 +19,9 @@ As a California visitor, I want to take a scenic multi-day road trip from Los An
 
 ### Links
 
-[This is a link to the repository](https://github.com/aaloksikand/California_Road_Trip_Planner/)
+*  Github Repo : https://github.com/aaloksikand/California_Road_Trip_Planner/
 
-[This is a link to the website](https://aaloksikand.github.io/California_Road_Trip_Plannner/)
+*  Live Link : https://aaloksikand.github.io/California_Road_Trip_Plannner/
 
 ### Technologies/Frameworks/Libraries Used
 
@@ -34,11 +37,26 @@ As a California visitor, I want to take a scenic multi-day road trip from Los An
 
 * GOOGLE's MAPS JAVASCRIPT API
 * DIRECTION SERVICE of DIRECTION API
-* GOOGLE's PLACES API
 * YELP API
 
 ### Screenshot
-![](./assets/images/Screenshot_of_project.png)
+
+Below is the start page of the Application
+
+!['California Road Trip Planner Start Page'](./assets/images/Screenshot_of_project.png)
+
+Below Page is  when user have selected the checkboxes
+
+!['California Road Trip Planner Attraction Selection Page'](./assets/images/Screenshot_with_selected_attractions.png)
+
+Below Page is  Route is created based on attractions selected
+
+
+Below Dialog Box for Go Back Button
+
+
+Below is Dialog Box for Directions Button
+
 
 ### References
 

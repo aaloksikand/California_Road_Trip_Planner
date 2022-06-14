@@ -222,35 +222,20 @@
   </div>
 </section> 
 
-<!--Carousel Test Container-->
+<!--YEL API Restaurnat Carousel-->
+<!--
+
+  Carousel Slides are generated Dynamically based on the attractions selected by User
+
+-->
 
  <section class="container bg-black my-5">  
-   <section class="row">
-   <section  id="carousel-section" class="hide">
+  <section class="row text-center">
+   <section  id="carousel-section" class="restaurant-carousel hide">
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"  id="carousel-container">
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="https://images.unsplash.com/photo-1576402187878-974f70c890a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1933&q=80" alt={restaurant-img}>
-          <div class="carousel-caption text-dark">
-           <div class="d-flex flex-column align-items-center justify-content-evenly py-5">
-          <h2 class="attraction-name"><strong>Attraction Name</strong></h2>
-          <div class="restaurant-info">
-          <h4 class="restaurant-name"><strong>Restaurant Name</strong></h4>
-          <p class="restaurant-address">Restaurant Address</p>
-          <a class="restaurant-website">Restaurant Website </a>
-          </div>
 
-           </div> 
-
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="https://images.unsplash.com/photo-1624726175512-19b9baf9fbd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="Third slide">
-        </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -261,8 +246,9 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-  </section>
    </section>
+
+  </section>
     
 
     <!-- JQUERY UI WIDGET DIALOG CONFIRMATION COMPONENT  -->
@@ -272,7 +258,9 @@
     </div>
 
 
-  </section>
+</section>
+
+
     <!--JQUERY & JQUERY WIDGET SCRIPT-->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -293,7 +281,7 @@
 
     <!-- <scrip src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
     
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE&libraries=places"></script>
+      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE&libraries=places"></script> -->
     <!--
         JAVASCRIPT MAP API 
      * The `defer` attribute causes the callback to execute after the full HTML
@@ -306,7 +294,7 @@
     * async allows the API loading to happen parellely while the remaining page is rendering
     -->
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI4WnhNGdD61jpIljMc8JwFpXFXOd2jUM&callback=initMap&libraries=places"></script>
     
      
     <!--CUSTOM SCRIPT & BOOTSTRAP RELATED SCRIPT-->

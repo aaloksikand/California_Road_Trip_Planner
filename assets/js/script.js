@@ -222,8 +222,10 @@ function calculateRoute(directionService,directionsRenderer){
             dirPanel.innerHTML += route.legs[i].distance.text + "<br>";}
 
             /*If received response is succesful,check nearby restaurants using YELP API */
-           
+                
+            //  checkNearByHotels();
                 checkNearByRestaurants();  //TO DO
+                
             
 
     })
@@ -249,7 +251,12 @@ function updateDisplay(event){
     //Display the directions Container and button
     
     buttonContainer.removeClass('hide');
-    carouselContainer.removeClass('hide');
+    // carouselContainer.removeClass('hide');
+    $('.restaurant-carousel').removeClass('hide')
+
+
+
+
     }
     
 
@@ -260,76 +267,93 @@ function checkNearByRestaurants(){
 let carouselImage=document.querySelector('.carousel-item img')
 let attraction_names=document.querySelectorAll('.attraction-checkbox a');
 
-let limit=3;
+//let simmyKey=ZDwLaK6UsBvGioKA2k9N9xR1ILix8RlCad-KoQRVZCwaEo5l4lmRmNQLlJ-94mFHBgmJV72ZvENWU2et0boIN1qY8o5ayBqAmc6QchnV9yCPZeSjw5UusbUSXdSnYnYx
+// let chrisKey="2QC4249zvAl_kbSHuEuPsK6DLlSe3SH5Ba4O5z2YCSoGQGAKL6zicl_M-WUYZ3e7QuzkXzJF_W131vfp2NkYDBUPwhiY3Txo0UxuujbWFtW13cu__YXwqb7vodKnYnYx"
+
+let limit=1;
 let radius=5000 //radius in meter
 let options={
 
     headers:{ "Content-Type": "application/json"  ,
-                 "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
+                 "Authorization": "Bearer 2QC4249zvAl_kbSHuEuPsK6DLlSe3SH5Ba4O5z2YCSoGQGAKL6zicl_M-WUYZ3e7QuzkXzJF_W131vfp2NkYDBUPwhiY3Txo0UxuujbWFtW13cu__YXwqb7vodKnYnYx",
                  "Access-Control-Allow-Origin": "*"
            }
 }
 
+
+let carouselMainDiv=document.querySelector('.carousel-inner');
+
 for(let index=0;index<waypoints.length;index++){
 
-    let name=attraction_names[index].innerHTML;
-    let lat=new google.maps.LatLng(waypoints[index].lat);
-    let lng=waypoints[index].lng;
+    let carouselItemDiv=document.createElement('div');
+    carouselItemDiv.classList.add('carousel-item');
     
-    console.log(attraction_names[index].innerHTML);
-    console.log(lat,lng);
+    if(index==0){
+        carouselItemDiv.classList.add('active');
+    }
+    else{
+        carouselItemDiv.classList.remove('active');
+    }
+    
 
-    let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}}&limit=${limit}`
+    let carouselCaption=document.createElement('div');
+    carouselCaption.classList.add('carousel-caption');
+
+   
+
+    let name=attraction_names[index].innerHTML;
+    
+    let lat=Number(waypoints[index].location.lat);
+    let lng=Number(waypoints[index].location.lng);
+    
+    // console.log(attraction_names[index].innerHTML);
+    console.log(lat, lng);
+
+    let searchUrl=`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=${radius}&longitude=${lng}&latitude=${lat}&limit=${limit}`
 
     fetch(searchUrl,options).
 then(response=>{
+    console.log(response);
      return response.json();
 }).
  then(
      data=>{
-        carouselImage.innerHTML(data.businesses[0].image_url);
-        $('attraction-name')[index].innerHTML
+
+        //restaurant image
+
+        let restaurantImage=data.businesses[0].image_url;
+        let imageEl=document.createElement('img');  
+        imageEl.classList.add('d-block');
+        imageEl.classList.add('w-100');
+        imageEl.setAttribute('src',restaurantImage); 
+
+        carouselItemDiv.append(imageEl)
+
+        
+        let restaurantName=data.businesses[0].name;
+        let restaurantAddress=data.businesses[0].location.display_address.join();
+
+        let h5El=document.createElement('h5');
+        h5El.classList.add('text-dark');
+        h5El.classList.add('font-weight-bold');
+        h5El.innerHTML=restaurantName;
+        let pEl=document.createElement('p');
+        pEl.innerHTML=restaurantAddress;
+        pEl.classList.add('text-dark');
+        pEl.classList.add('font-weight-bold');
+
+        carouselCaption.append(h5El);
+        carouselCaption.append(pEl);
+
+        carouselItemDiv.append(carouselCaption);
+
+
+        carouselMainDiv.append(carouselItemDiv);
        
-//         console.log(data.businesses[0].location);
-//         console.log(data.businesses[0].image_url);
-//         console.log(data.businesses[0].name);
-//         console.log(data.businesses[0].rating);
     })
      .catch(e=>{console.log(e)});
     
 }
-
-// let searchUrl='https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?radius=5000&longitude=-118.243683&latitude=34.052235&limit=3'
-
-// let options={
-
-//     headers:{ "Content-Type": "application/json"  ,
-//                 "Authorization": "Bearer jhDsD5a9n7xdYJUk94TqE9wG3ntUL8akfLBDI7OcItckas2gKFtqQUJTuD0wYlHhCkXQx9RiEEyEx4pZUOTm-t4IMvcyEgoNiJ__bVqEBbml0lklxkiDbAD2NkKmYnYx",
-//                 "Access-Control-Allow-Origin": "*"
-//             }
-// }
-
-
-// fetch(searchUrl,options).
-// then(response=>{
-//     console.log(response);
-//     return response.json();
-// }).
-// then(
-//     data=>{
-        
-  
-//         console.log(data);
-//         // let url=data.businesses[0].image_url;
-//         // console.log( carouselItem[0]);
-//         // carouselItem[0].setAttributes('src',url);
-//         console.log(data.businesses[0].location);
-//         console.log(data.businesses[0].image_url);
-//         console.log(data.businesses[0].name);
-//         console.log(data.businesses[0].rating);
-    
-//     })
-// .catch(e=>{console.log(e)});
 
 }
 
@@ -545,53 +569,75 @@ Checking * sign of the dialog box
 //   cxonsole.log(e);
 // });
 
+/*******************JAVASCRIPT PLACES API***************************/
 
-var apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE"; //Google Places API Key
-var destinationList = ["santa+monica","malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay", "san+francisco+golden+gate+bridge"]  //List of destinations along PCH
-var  destinationHotelList= ["best+western+royal+palace","best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay", "hotel+bijou+san+francisco"]  //List of nearest Best Western to destination
 
-destinationList.forEach(function(destination){  //forEach function that will loop through destinations list
-    listDestinations(destination)
-})
+function checkNearByHotels(){
+
+let apiKey = "AIzaSyC4Bpv7f_ig_BInEeUYIgH2FCC3WDM9qIE"; //Google Places API Key
+let destinationList = ["santa+monica","malibu+surfrider+beach", "ojai", "santa+barbara+state+street", "solvang+danish+town", "morro+bay", "paso+robles+wineries", "big+sur", "carmel+by+the+sea", "santa+cruz", "half+moon+bay", "san+francisco+golden+gate+bridge"]  //List of destinations along PCH
+let  destinationHotelList= ["best+western+royal+palace","best+western+malibu", "best+western+ojai", "best+western+santa+barbara", "best+western+solvang", "best+western+morro+bay", "best+western+paso+robles", "best+western+big+sur", "best+western+carmel+by+the+sea", "best+western+santa+cruz", "best+western+half+moon+bay", "hotel+bijou+san+francisco"]  //List of nearest Best Western to destination
+
+
+
+
+/*Destination WishList */
+// destinationList.forEach(function(destination){  //forEach function that will loop through destinations list
+//     listDestinations(destination)
+// })
 
 destinationHotelList.forEach(function(hotel){  //forEach function that will look through destination Hotels
-    listHotels(hotel)
+    
+    listHotels(hotel);
+     
 })
 
-function listDestinations(query){  //fetching destination data from the Google Places API
-fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`)
-.then(function(data)
-{
-    return data.json()
-}) .then(function(response)
-{
-    var Lat = response.results.geometry.location.lat  //destination latitude
-    var Long = response.results.location.lng  //destination longitude
-    var PlaceID = response.results.place_id  //destination Place ID
-    var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //destination image
+/* Destination Wish List */
+// function listDestinations(query){  //fetching destination data from the Google Places API
+// fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${apiKey}`)
+// .then(function(data)
+// {
+//     return data.json()
+// }) .then(function(response)
+// {
+//     var lat = response.results.geometry.location.lat  //destination latitude
+//     var long = response.results.location.lng  //destination longitude
+//     var placeID = response.results.place_id  //destination Place ID
+//     var image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //destination image
 
-})
-}
+// })
+// }
 
+/*`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey} */
+let index=-1;
 function listHotels(query){  //fetching hotel data from the Google Places API
-    fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey}`)
+    
+    fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=lodging&key=${apiKey}&limit=1`)
+     .then(function(response)
+     {
+        index++;
+         return response.json();
+    }) 
     .then(function(data)
-    {
-        return data.json()
-    }) .then(function(response)
-    {
-        var Lat = response.results.geometry.location.lat  //hotel latitude
-        var Long = response.results.location.lng  //hotel longitude
-        var PlaceID = response.results.place_id //hotel places id
-        var Image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+response.results[0].photos[0].photo_reference+"sensor=false&key="+apiKey  //hotel photo
-        var Name = response.results.name  //hotel name
-        var Address = response.results.formatted_address  //hotel address
+    { 
+    //  console.log(data);
+     console.log(index);
+         let hotelName = data.results[index].name  ;
+         let hoteladdress = data.results[index].formatted_address;
+        console.log("Name "+hotelName);
+        console.log("Add "+hoteladdress);
+
+       
     })
-    }
+    .catch(e=>console.log(e))
+    
+    
+}}
+
+
+    
+    
 
 
 
 
-  //Retrying  PR 
-
-  
